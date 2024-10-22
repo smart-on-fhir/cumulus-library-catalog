@@ -72,7 +72,7 @@ from    MRREL__icd10cm R,
         catalog__icd10_chapter PAR
 where   C.TTY in ('HT')
 and     R.REL='CHD'
-and     (C.CODE like '%-%' or C.CODE_len = 3)
+and     C.CODE like '%-%' -- or C.CODE_len = 3)
 and     R.CUI1=PAR.CUI
 and     R.CUI2=C.CUI
 order by C.CODE asc;
@@ -169,8 +169,8 @@ select CUI1, TTY, CUI2, CODE, STR from catalog__icd10_category where CODE like '
             MRCONSO__icd10cm C,
             catalog__icd10_category PAR
     where   C.TTY in ('HT', 'PT')
-    and     C.CODE_len = 5
     and     C.CODE like '%.%'
+    and     (C.CODE_len = 5 or C.CODE like '%.%X%') -- Sequella
     and     R.REL = 'CHD'
     and     R.CUI1 = PAR.CUI
     and     R.CUI2 = C.CUI
@@ -228,8 +228,8 @@ select CUI1, TTY, CUI2, CODE, STR from catalog__icd10_category where CODE like '
             MRCONSO__icd10cm C,
             catalog__icd10_code5 PAR
     where   C.TTY in ('HT', 'PT')
-    and     (   (C.CODE_len = 6 and C.CODE like '%.%') OR
-                (C.CODE_len = 8 and C.CODE like '%.%X%') )  -- allow for "initial/subsequent encounter"
+    and     C.CODE like '%.%'
+    and     (C.CODE_len = 6 or C.CODE like '%.%X%') -- Sequella
     and     R.REL = 'CHD'
     and     R.CUI1 = PAR.CUI
     and     R.CUI2 = C.CUI
@@ -262,7 +262,8 @@ select CUI1, TTY, CUI2, CODE, STR from catalog__icd10_category where CODE like '
             MRCONSO__icd10cm C,
             catalog__icd10_code6 PAR
     where   C.TTY in ('HT', 'PT')
-    and     C.CODE_len = 7
+    and     C.CODE like '%.%'
+    and     (C.CODE_len = 7 or C.CODE like '%.%X%') -- Sequella
     and     C.CODE like '%.%'
     and     R.REL = 'CHD'
     and     R.CUI1 = PAR.CUI
@@ -291,7 +292,8 @@ select CUI1, TTY, CUI2, CODE, STR from catalog__icd10_category where CODE like '
             MRCONSO__icd10cm C,
             catalog__icd10_code7 PAR
     where   C.TTY in ('HT', 'PT')
-    and     C.CODE_len = 8
+    and     C.CODE like '%.%'
+    and     (C.CODE_len = 8 or C.CODE like '%.%X%') -- Sequella
     and     C.CODE like '%.%'
     and     R.REL = 'CHD'
     and     R.CUI1 = PAR.CUI
@@ -400,29 +402,11 @@ drop    table if exists catalog__icd10_missing;
 create  table           catalog__icd10_missing
 select      distinct TTY, CODE_len, CUI, CODE, STR
 from        MRCONSO__icd10cm C
-where       C.CODE not in (select distinct CODE from catalog__icd10_tree)
+where       C.CUI != 'C2880081' -- root
+and         C.CODE not in (select distinct CODE from catalog__icd10_tree)
 order by    CODE, TTY;
 
--- select STYPE1, STYPE2, CUI1, TTY, CUI2, CODE, STR from catalog__icd10_code7 where CODE like 'N1%';
-
-
-select      TTY,
-            count(distinct CODE) cnt_code,
-            count(distinct CUI)  cnt_cui
-from        catalog__icd10_missing C
-group       by TTY;
---    +-----+----------+---------+
---    | TTY | cnt_code | cnt_cui |
---    +-----+----------+---------+
---    | ET  |      744 |    1149 |
---    | HT  |     2434 |    2412 |
---    | PT  |    18845 |   18836 |
---    +-----+----------+---------+
-
---    select * from catalog__icd10_tree where CODE like 'N99%';
-
 select * from catalog__icd10_missing where CODE like 'N%' order by CODE_len;
-
 
 --    source /Users/andy/2024/cumulus-library-catalog/catalog/dx_icd10_tree.sql
 
