@@ -1,7 +1,7 @@
 -- https://www.nlm.nih.gov/research/umls/sourcereleasedocs/current/ICD10CM/stats.html
 
-drop    table if exists MRREL__icd10cm;
-drop    table if exists MRCONSO__icd10cm;
+drop    table if exists MRREL_icd10cm;
+drop    table if exists MRCONSO_icd10cm;
 drop    table if exists catalog__icd10_tree;
 drop    view  if exists catalog__icd10_chapter;
 drop    view  if exists catalog__icd10_block;
@@ -11,20 +11,20 @@ drop    view  if exists catalog__icd10_code6;
 drop    view  if exists catalog__icd10_code7;
 drop    view  if exists catalog__icd10_code8;
 
-drop    table if exists MRCONSO__icd10cm;
-create  table           MRCONSO__icd10cm
+drop    table if exists MRCONSO_icd10cm;
+create  table           MRCONSO_icd10cm AS
 select  *, length(CODE) as CODE_len from MRCONSO C where SAB='ICD10CM';
 
---    call create_index('MRCONSO__icd10cm', 'CUI');
+--    call create_index('MRCONSO_icd10cm', 'CUI');
 
-drop    table if exists MRREL__icd10cm;
-create  table           MRREL__icd10cm as
+drop    table if exists MRREL_icd10cm;
+create  table           MRREL_icd10cm as
 select * from MRREL where SAB='ICD10CM';
 
---    call create_index('MRREL__icd10cm', 'CUI1');
---    call create_index('MRREL__icd10cm', 'CUI2');
+--    call create_index('MRREL_icd10cm', 'CUI1');
+--    call create_index('MRREL_icd10cm', 'CUI2');
 
---    select REL, RELA, count(distinct CUI1) cnt_cui from MRREL__icd10cm  group by REL, RELA ;
+--    select REL, RELA, count(distinct CUI1) cnt_cui from MRREL_icd10cm  group by REL, RELA ;
 --    +-----+------+---------+
 --    | REL | RELA | cnt_cui |
 --    +-----+------+---------+
@@ -37,9 +37,9 @@ select * from MRREL where SAB='ICD10CM';
 -- https://www.icd10data.com/ICD10CM/Codes/N00-N99/
 
 create or replace view catalog__icd10_chapter as
-select  distinct R.*, C.CUI, C.TTY, C.CODE_len, C.CODE, C.STR
-from    MRREL__icd10cm R,
-        MRCONSO__icd10cm C
+select  distinct R.RUI, R.CUI1, R.CUI2, C.TTY, C.CODE_len, C.CODE, C.STR
+from    MRREL_icd10cm R,
+        MRCONSO_icd10cm C
 where   C.TTY  in ('HT')
 and     C.CODE like '%-%'
 and     R.CUI1='C2880081'
@@ -58,14 +58,14 @@ order by C.CODE asc;
 -- https://www.icd10data.com/ICD10CM/Codes/N00-N99/N10-N16
 
 create or replace view catalog__icd10_block as
-select  distinct R.*, C.CUI, C.TTY, C.CODE_len, C.CODE, C.STR
-from    MRREL__icd10cm R,
-        MRCONSO__icd10cm C,
+select  distinct R.RUI, R.CUI1, R.CUI2, C.TTY, C.CODE_len, C.CODE, C.STR
+from    MRREL_icd10cm R,
+        MRCONSO_icd10cm C,
         catalog__icd10_chapter PAR
 where   C.TTY in ('HT')
 and     R.REL='CHD'
 and     C.CODE like '%-%' -- or C.CODE_len = 3)
-and     R.CUI1=PAR.CUI
+and     R.CUI1=PAR.CUI2
 and     R.CUI2=C.CUI
 order by C.CODE asc;
 
@@ -92,17 +92,17 @@ order by C.CODE asc;
 -- ########## ICD10 category N13  | Obstructive and reflux uropathy
 -- https://www.icd10data.com/ICD10CM/Codes/N00-N99/N10-N16/N13-/N13
 
-    create or replace view catalog__icd10_category as
-    select  distinct R.*, C.CUI, C.TTY, C.CODE_len, C.CODE, C.STR
-    from    MRREL__icd10cm R,
-            MRCONSO__icd10cm C,
-            catalog__icd10_block PAR
-    where   C.TTY in ('HT', 'PT')
-    and     C.CODE_len = 3
-    and     R.REL = 'CHD'
-    and     R.CUI1 = PAR.CUI
-    and     R.CUI2 = C.CUI
-    order by C.CODE asc;
+create or replace view catalog__icd10_category as
+select  distinct R.RUI, R.CUI1, R.CUI2, C.TTY, C.CODE_len, C.CODE, C.STR
+from    MRREL_icd10cm R,
+        MRCONSO_icd10cm C,
+        catalog__icd10_block PAR
+where   C.TTY in ('HT', 'PT')
+and     C.CODE_len = 3
+and     R.REL = 'CHD'
+and     R.CUI1 = PAR.CUI2
+and     R.CUI2 = C.CUI
+order by C.CODE asc;
 
 --    select CUI1, TTY, CUI2, CODE, STR from catalog__icd10_category where CODE like 'N1%';
 --    +----------+-----+----------+------+--------------------------------------------------------------------------+
@@ -124,15 +124,15 @@ order by C.CODE asc;
 --  https://www.icd10data.com/ICD10CM/Codes/N00-N99/N10-N16/N13-/N13.7
 
 create or replace view catalog__icd10_code5 as
-select  distinct R.*, C.CUI, C.TTY, C.CODE_len, C.CODE, C.STR
-from    MRREL__icd10cm R,
-        MRCONSO__icd10cm C,
+select  distinct R.RUI, R.CUI1, R.CUI2, C.TTY, C.CODE_len, C.CODE, C.STR
+from    MRREL_icd10cm R,
+        MRCONSO_icd10cm C,
         catalog__icd10_category PAR
 where   C.TTY in ('HT', 'PT')
 and     C.CODE like '%.%'
 and     (C.CODE_len = 5 or C.CODE like '%.%X%') -- Sequella
 and     R.REL = 'CHD'
-and     R.CUI1 = PAR.CUI
+and     R.CUI1 = PAR.CUI2
 and     R.CUI2 = C.CUI
 order by C.CODE asc;
 
@@ -183,18 +183,18 @@ order by C.CODE asc;
 --  ########## ICD10 code N13.72 | Vesicoureteral-reflux with reflux nephropathy without hydroureter
 --  https://www.icd10data.com/ICD10CM/Codes/N00-N99/N10-N16/N13-/N13.72
 
-    create or replace view catalog__icd10_code6 as
-    select  distinct R.*, C.CUI, C.TTY, C.CODE_len, C.CODE, C.STR
-    from    MRREL__icd10cm R,
-            MRCONSO__icd10cm C,
-            catalog__icd10_code5 PAR
-    where   C.TTY in ('HT', 'PT')
-    and     C.CODE like '%.%'
-    and     (C.CODE_len = 6 or C.CODE like '%.%X%') -- Sequella
-    and     R.REL = 'CHD'
-    and     R.CUI1 = PAR.CUI
-    and     R.CUI2 = C.CUI
-    order by C.CODE asc;
+create or replace view catalog__icd10_code6 as
+select  distinct R.RUI, R.CUI1, R.CUI2, C.TTY, C.CODE_len, C.CODE, C.STR
+from    MRREL_icd10cm R,
+        MRCONSO_icd10cm C,
+        catalog__icd10_code5 PAR
+where   C.TTY in ('HT', 'PT')
+and     C.CODE like '%.%'
+and     (C.CODE_len = 6 or C.CODE like '%.%X%') -- Sequella
+and     R.REL = 'CHD'
+and     R.CUI1 = PAR.CUI2
+and     R.CUI2 = C.CUI
+order by C.CODE asc;
 
 --    select CUI1, TTY, CUI2, CODE, STR from catalog__icd10_code6 where CODE like 'N1%';
 --    +----------+-----+----------+--------+---------------------------------------------------------------------------+
@@ -218,19 +218,19 @@ order by C.CODE asc;
 --  ########## ICD10 code N13.721 | Vesicoureteral-reflux with reflux nephropathy without hydroureter, unilateral
 --  https://www.icd10data.com/ICD10CM/Codes/N00-N99/N10-N16/N13-/N13.721
 
-    create or replace view catalog__icd10_code7 as
-    select  distinct R.*, C.CUI, C.TTY, C.CODE_len, C.CODE, C.STR
-    from    MRREL__icd10cm R,
-            MRCONSO__icd10cm C,
-            catalog__icd10_code6 PAR
-    where   C.TTY in ('HT', 'PT')
-    and     C.CODE like '%.%'
-    and     (C.CODE_len = 7 or C.CODE like '%.%X%') -- Sequella
-    and     C.CODE like '%.%'
-    and     R.REL = 'CHD'
-    and     R.CUI1 = PAR.CUI
-    and     R.CUI2 = C.CUI
-    order by C.CODE asc;
+create or replace view catalog__icd10_code7 as
+select  distinct R.RUI, R.CUI1, R.CUI2, C.TTY, C.CODE_len, C.CODE, C.STR
+from    MRREL_icd10cm R,
+        MRCONSO_icd10cm C,
+        catalog__icd10_code6 PAR
+where   C.TTY in ('HT', 'PT')
+and     C.CODE like '%.%'
+and     (C.CODE_len = 7 or C.CODE like '%.%X%') -- Sequella
+and     C.CODE like '%.%'
+and     R.REL = 'CHD'
+and     R.CUI1 = PAR.CUI2
+and     R.CUI2 = C.CUI
+order by C.CODE asc;
 
 --    select CUI1, TTY, CUI2, CODE, STR from catalog__icd10_code7 where CODE like 'N1%';
 --    +----------+-----+----------+---------+--------------------------------------------------------------------------------+
@@ -250,19 +250,19 @@ order by C.CODE asc;
 --  ########## ICD10 code E13.3513 | specified diabetes mellitus with proliferative diabetic retinopathy with macular edema, bilateral
 --  https://www.icd10data.com/ICD10CM/Codes/E00-E89/E08-E13/E13-/E13.3513
 
-    create or replace view catalog__icd10_code8 as
-    select  distinct R.*, C.CUI, C.TTY, C.CODE_len, C.CODE, C.STR
-    from    MRREL__icd10cm R,
-            MRCONSO__icd10cm C,
-            catalog__icd10_code7 PAR
-    where   C.TTY in ('HT', 'PT')
-    and     C.CODE like '%.%'
-    and     (C.CODE_len = 8 or C.CODE like '%.%X%') -- Sequella
-    and     C.CODE like '%.%'
-    and     R.REL = 'CHD'
-    and     R.CUI1 = PAR.CUI
-    and     R.CUI2 = C.CUI
-    order by C.CODE asc;
+create or replace view catalog__icd10_code8 as
+select  distinct R.RUI, R.CUI1, R.CUI2, C.TTY, C.CODE_len, C.CODE, C.STR
+from    MRREL_icd10cm R,
+        MRCONSO_icd10cm C,
+        catalog__icd10_code7 PAR
+where   C.TTY in ('HT', 'PT')
+and     C.CODE like '%.%'
+and     (C.CODE_len = 8 or C.CODE like '%.%X%') -- Sequella
+and     C.CODE like '%.%'
+and     R.REL = 'CHD'
+and     R.CUI1 = PAR.CUI2
+and     R.CUI2 = C.CUI
+order by C.CODE asc;
 
 --    Note: No Kidney "N" codes are this specific, below is example for Diabetes.
 --
@@ -276,8 +276,19 @@ order by C.CODE asc;
 --    | C2874148 | PT  | C4268152 | E13.3519 | Other specified diabetes mellitus with proliferative diabetic retinopathy with macular edema, unspecified eye |
 --    +----------+-----+----------+----------+---------------------------------------------------------------------------------------------------------------+
 
+drop    table if exists catalog__icd10_code;
+create  table           catalog__icd10_code  as
+select *, 5 as depth from catalog__icd10_code5
+UNION
+select *, 6 as depth from catalog__icd10_code6
+UNION
+select *, 7 as depth from catalog__icd10_code7
+UNION
+select *, 8 as depth from catalog__icd10_code8;
+
+
 drop    table if exists catalog__icd10_tree;
-create  table           catalog__icd10_tree
+create  table           catalog__icd10_tree  as
 select *, 2 as depth from catalog__icd10_chapter
 UNION
 select *, 3 as depth from catalog__icd10_block
@@ -292,9 +303,27 @@ select *, 7 as depth from catalog__icd10_code7
 UNION
 select *, 8 as depth from catalog__icd10_code8;
 
+select      depth,
+            count(distinct CODE) cnt_code,
+            count(distinct CUI1)  cnt_cui1,
+            count(distinct CUI2)  cnt_cui2
+from        catalog__icd10_tree
+group by    depth
+order by    depth;
+
+--    depth,cnt_code,cnt_cui1,cnt_cui2
+--    2	    22	    1	    22
+--    3	    296	    22	    296
+--    4	    1917	284	    1916
+--    5	    10643	1707	10352
+--    6	    19250	4786	19210
+--    7	    30683	8472	30649
+--    8	    41493	9777	41466
+
 select      depth, CODE_len, TTY,
             count(distinct CODE) cnt_code,
-            count(distinct CUI)  cnt_cui
+            count(distinct CUI1)  cnt_cui1,
+            count(distinct CUI2)  cnt_cui2
 from        catalog__icd10_tree
 group by    depth, CODE_len, TTY
 order by    depth, CODE_len, TTY;
@@ -333,13 +362,13 @@ order by    depth, CODE_len, TTY;
 --    |     8 |        8 | PT  |    40034 |   40034 |
 --    +-------+----------+-----+----------+---------+
 
+-- Test to see if any ICD10 codes were missed
+
 create  or replace view catalog__icd10_missing as
 select      distinct TTY, CODE_len, CUI, CODE, STR
-from        MRCONSO__icd10cm C
+from        MRCONSO_icd10cm C
 where       C.CUI != 'C2880081' -- root
 and         C.CODE not in (select distinct CODE from catalog__icd10_tree)
 order by    CODE, TTY;
 
 select * from catalog__icd10_missing;
-
---    source /Users/andy/2024/cumulus-library-catalog/catalog/dx_icd10_tree.sql
