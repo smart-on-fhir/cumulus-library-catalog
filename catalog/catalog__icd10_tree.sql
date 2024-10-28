@@ -10,6 +10,8 @@ drop    view  if exists catalog__icd10_code5;
 drop    view  if exists catalog__icd10_code6;
 drop    view  if exists catalog__icd10_code7;
 drop    view  if exists catalog__icd10_code8;
+drop    view  if exists catalog__icd10_code;
+drop    view  if exists catalog__icd10_missing;
 
 drop    table if exists MRCONSO_icd10cm;
 create  table           MRCONSO_icd10cm AS
@@ -364,11 +366,13 @@ order by    depth, CODE_len, TTY;
 
 -- Test to see if any ICD10 codes were missed
 
-create  or replace view catalog__icd10_missing as
+create  or replace view catalog__icd10_check_missing as
 select      distinct TTY, CODE_len, CUI, CODE, STR
 from        MRCONSO_icd10cm C
 where       C.CUI != 'C2880081' -- root
 and         C.CODE not in (select distinct CODE from catalog__icd10_tree)
 order by    CODE, TTY;
 
-select * from catalog__icd10_missing;
+select * from catalog__icd10_check_missing;
+
+drop view catalog__icd10_check_missing;
