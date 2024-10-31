@@ -1,0 +1,23 @@
+study_prefix = "catalog"
+
+[sql_config]
+
+file_names = [
+    "catalog__icd10_tree.sql",
+    "catalog__icd10_cohort.sql",
+    "catalog__icd10_cohort_code.sql",
+    "catalog__icd10_cohort_category.sql",
+    "catalog__icd10_cohort_block.sql",
+    "catalog__icd10_cohort_chapter.sql",
+]
+
+# TODO: import Opioid table builders
+#[table_builder_config]
+#file_names = [
+#    "static_builder.py",
+#    "rxnorm_valueset_builder.py",
+#    "additional_rules_builder.py",
+#    "excluded_rules_builder.py",
+#]
+
+use_dedicated_schema="catalog"

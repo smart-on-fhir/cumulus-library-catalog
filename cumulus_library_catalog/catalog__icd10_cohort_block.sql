@@ -23,7 +23,6 @@ from    catalog__icd10_cohort_category as cohort,
         UMLS.catalog__icd10_block as tree
 where   cohort.CUI1 = tree.CUI2;
 
-
 -- ####################################################
 --
 -- group by CUBE patient demographics
