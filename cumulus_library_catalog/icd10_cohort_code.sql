@@ -1,8 +1,8 @@
 -- ####################################################
 -- ICD10 CODE
-drop    table if exists catalog__icd10_cohort_code;
+drop    table if exists catalog.icd10_cohort_code;
 
-create  table       catalog__icd10_cohort_code as
+create  table       catalog.icd10_cohort_code as
 select  distinct
         tree.CUI1,
         tree.CUI2,
@@ -17,12 +17,12 @@ select  distinct
         cohort.ethnicity_display,
         cohort.subject_ref,
         cohort.encounter_ref
-from    catalog__icd10_cohort as cohort,
-        UMLS.catalog__icd10_code as tree
+from    catalog.icd10_cohort as cohort,
+        catalog.icd10_code as tree
 where   tree.code_len = 5
 and     starts_with(cohort.CODE, tree.CODE);
 
-create  or replace view catalog__icd10_cohort_code_cube_patient as
+create  or replace view catalog.icd10_cohort_code_cube_patient as
 with powerset as
 (
     select  count(distinct subject_ref) as cnt,
@@ -31,18 +31,18 @@ with powerset as
             gender,
             race_display,
             ethnicity_display
-    from    catalog__icd10_cohort_code
+    from    catalog.icd10_cohort_code
     group by CUBE(icd10_code_par_display, age_at_visit, gender, race_display, ethnicity_display)
 )
 select * from powerset where cnt >= 10;
 
-create  or replace view catalog__icd10_cohort_code_cube_encounter as
+create  or replace view catalog.icd10_cohort_code_cube_encounter as
 with powerset as
 (
     select  count(distinct ICD10.encounter_ref) as cnt,
             icd10_code_par_display,
             class_code, servicetype_display
-    from    catalog__icd10_cohort_code as ICD10
+    from    catalog.icd10_cohort_code as ICD10
     group by CUBE(icd10_code_par_display, class_code, servicetype_display)
 )
 select * from powerset where cnt >= 10;

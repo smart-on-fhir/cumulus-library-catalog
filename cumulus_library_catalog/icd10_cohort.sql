@@ -2,12 +2,12 @@
 --    select distinct code, code_display
 --    from core__condition
 --    where system = 'http://hl7.org/fhir/sid/icd-10-cm'
---    and code not in (select distinct code from UMLS.catalog__icd10_tree)
+--    and code not in (select distinct code from UMLS.catalog.icd10_tree)
 
 -- ####################################################
-drop    table if exists catalog__icd10_cohort;
+drop    table if exists catalog.icd10_cohort;
 
-create  table           catalog__icd10_cohort as
+create  table           catalog.icd10_cohort as
 with ICD10 as
 (
     select  distinct
@@ -36,7 +36,7 @@ select  distinct
 from    ICD10,
         core__encounter as E,
         core__patient   as P,
-        UMLS.catalog__icd10_tree as tree
+        catalog.icd10_tree as tree
 where   ICD10.code = tree.CODE
 and     ICD10.encounter_ref = E.encounter_ref
 and     ICD10.subject_ref = P.subject_ref;

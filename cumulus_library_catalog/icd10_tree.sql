@@ -290,6 +290,11 @@ select *, 7 as depth from catalog.icd10_code7
 UNION
 select *, 8 as depth from catalog.icd10_code8;
 
+drop table if exists catalog.icd10_code5;
+drop table if exists catalog.icd10_code6;
+drop table if exists catalog.icd10_code7;
+drop table if exists catalog.icd10_code8;
+
 
 drop    table if exists     catalog.icd10_tree;
 create  table               catalog.icd10_tree  as

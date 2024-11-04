@@ -1,14 +1,14 @@
 -- ####################################################
 --
 -- ICD10 patient encounters
-drop    table if exists catalog__icd10_cohort_chapter;
+drop    table if exists catalog.icd10_cohort_block;
 
-create  table       catalog__icd10_cohort_chapter as
+create  table       catalog.icd10_cohort_block as
 select  distinct
         tree.CUI1,
         tree.CUI2,
-        tree.CODE as icd10_chapter,
-        tree.STR  as icd10_chapter_display,
+        tree.CODE as icd10_block,
+        tree.STR  as icd10_block_display,
         cohort.icd10_category,
         cohort.icd10_code,
         cohort.class_code,
@@ -19,38 +19,37 @@ select  distinct
         cohort.ethnicity_display,
         cohort.subject_ref,
         cohort.encounter_ref
-from    catalog__icd10_cohort_block as cohort,
-        UMLS.catalog__icd10_chapter as tree
+from    catalog.icd10_cohort_category as cohort,
+        catalog.icd10_block as tree
 where   cohort.CUI1 = tree.CUI2;
-
 
 -- ####################################################
 --
 -- group by CUBE patient demographics
-create  or replace view catalog__icd10_cohort_chapter_cube_patient as
+create  or replace view catalog.icd10_cohort_block_cube_patient as
 with powerset as
 (
     select  count(distinct subject_ref) as cnt,
-            icd10_chapter_display,
+            icd10_block_display,
             age_at_visit,
             gender,
             race_display,
             ethnicity_display
-    from    catalog__icd10_cohort_chapter
-    group by CUBE(icd10_chapter_display, age_at_visit, gender, race_display, ethnicity_display)
+    from    catalog.icd10_cohort_block
+    group by CUBE(icd10_block_display, age_at_visit, gender, race_display, ethnicity_display)
 )
 select * from powerset where cnt >= 10;
 
 -- ####################################################
 --
 -- group by CUBE encounter setting
-create  or replace view catalog__icd10_cohort_chapter_cube_encounter as
+create  or replace view catalog.icd10_cohort_block_cube_encounter as
 with powerset as
 (
     select  count(distinct encounter_ref) as cnt,
-            icd10_chapter_display,
+            icd10_block_display,
             class_code, servicetype_display
-    from    catalog__icd10_cohort_chapter
-    group by CUBE(icd10_chapter_display, class_code, servicetype_display)
+    from    catalog.icd10_cohort_block
+    group by CUBE(icd10_block_display, class_code, servicetype_display)
 )
 select * from powerset where cnt >= 10;

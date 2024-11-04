@@ -5,11 +5,11 @@ study_prefix = "catalog"
 file_names = [
     "umls_prereq.sql",
     "icd10_tree.sql",
-#    "catalog__icd10_cohort.sql",
-#    "catalog__icd10_cohort_code.sql",
-#    "catalog__icd10_cohort_category.sql",
-#    "catalog__icd10_cohort_block.sql",
-#    "catalog__icd10_cohort_chapter.sql",
+    "icd10_cohort.sql",
+    "icd10_cohort_code.sql",
+    "icd10_cohort_category.sql",
+    "icd10_cohort_block.sql",
+    "icd10_cohort_chapter.sql",
 ]
 
 # TODO: import Opioid table builders
