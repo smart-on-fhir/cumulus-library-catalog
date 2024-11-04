@@ -13,10 +13,10 @@
     drop    table if exists catalog.mrrel_is_a;
     create  table           catalog.mrrel_is_a AS
      select * from umls.MRREL
-     WHERE REL = 'CHD'
-     OR   RELA in ('isa','tradename_of','has_tradename','has_basis_of_strength_substance')
-    ;
-    delete from umls.mrrel_is_a where REL in ('RB', 'PAR');
+     WHERE  REL = 'CHD'
+     OR    (REL not in ('RB', 'PAR')
+            AND
+            RELA in ('isa','tradename_of','has_tradename','has_basis_of_strength_substance'));
 
 --    call utf8_unicode('umls.mrrel_is_a');
 --    call create_index('umls.mrrel_is_a', 'CUI1');
