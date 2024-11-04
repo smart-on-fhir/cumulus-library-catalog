@@ -1,7 +1,7 @@
 -- ####################################################
-drop    table if exists catalog__rx_cohort;
+drop    table if exists catalog.rx_cohort;
 
-create  table           catalog__rx_cohort as
+create  table           catalog.rx_cohort as
 with RX as
 (
     select  distinct
@@ -27,11 +27,11 @@ select  distinct
         E.servicetype_display,
         RX.subject_ref,
         RX.encounter_ref,
-        tree.STR_parent
+        tree.medrt_display
 from    RX,
         core__encounter as E,
         core__patient   as P,
-        rxnorm.medrt_tree_leaf as tree
+        catalog.rx_tree_rxnorm as tree
 where   RX.medication_code = tree.CODE2
 and     RX.encounter_ref = E.encounter_ref
 and     RX.subject_ref = P.subject_ref;
