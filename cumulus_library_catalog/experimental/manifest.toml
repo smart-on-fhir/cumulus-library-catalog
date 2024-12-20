@@ -10,6 +10,8 @@ file_names = [
     "icd10_cohort_category.sql",
     "icd10_cohort_block.sql",
     "icd10_cohort_chapter.sql",
+    "lab_tree.sql",
+    "lab_cohort.sql"
 ]
 
 # TODO: import Opioid table builders

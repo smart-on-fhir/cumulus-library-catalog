@@ -1,0 +1,65 @@
+[project]
+name = "cumulus-library-catalog"
+version = "1.0"
+requires-python = ">= 3.11"
+# If you need python libraries, add them here
+dependencies = [
+    "cumulus-library >= 3, <4",
+    "sqlfluff >=3",
+    "xlrd",
+    "openpyxl",
+    "pandas"
+]
+# You can alter this to discuss your study specifics
+description = "Catalog hierarchies for Dx, Rx, Labs, and other FHIR resource types"
+readme = "README.md"
+license = { text="Apache License 2.0" }
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.urls]
+Home = "https://smarthealthit.org/cumulus-a-universal-sidecar-for-a-smart-learning-healthcare-system/"
+Documentation = "https://docs.smarthealthit.org/cumulus/"
+# Change this source to reference your github URL
+Source = "https://github.com/smart-on-fhir/cumulus-library-opioid-valueset"
+
+
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[project.optional-dependencies]
+dev = [
+    "ruff < 0.6",
+    "pylint",    
+]
+test = [
+    "pytest",    
+]
+
+[tool.flit.sdist]
+include = ["LICENSE"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+allowed-confusables = ["’"]  # allow proper apostrophes
+select = [
+    "A",  # prevent using keywords that clobber python builtins
+    "E",  # pycodestyle
+    "F",  # pyflakes
+    "I",  # isort
+    "PLE",  # pylint errors
+    "RUF",  # the ruff developer's own rules
+    "S",  # bandit security warnings
+    "UP",  # alert you when better syntax is available in your python version
+]
+[tool.ruff.lint.per-file-ignores]
+
+"**/__init__.py" = ["F401"]  # init files hold API, so not using imports is intentional
+"tests/**" = ["S"]  # tests do suspicious stuff that's fine, actually
