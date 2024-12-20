@@ -1,0 +1,73 @@
+# 'study_prefix' should be a string at the start of each table. We'll use this
+# to clean up queries, so it should be unique. Name your tables in the following
+# format: [study_prefix]__[table_name]. It should probably, but not necessarily,
+# be the same name as the folder the study definition is in.
+study_prefix = "catalog"
+
+
+# The following section describes all tables that should be generated directly
+# from SQL files.
+
+[file_config]
+
+# 'file_names' defines a list of files to execute, in order, in this folder.
+# Three file types are supported:
+#   - Raw SQL files
+#   - Python files, which should contain a class that is based off of
+#       BaseTableBuilder (or a derivative) from builders/base_table_builder.py
+#   - TOML files, which provide a set of configuration params to a workflow
+# These files will be executed in the order provided.
+
+file_names = [
+    "icd10_tree.sql",
+    "icd10_cohort.sql",
+    "icd10_chapter.sql",
+    "icd10_category.sql",
+    "icd10_code.sql",
+    "icd10_pair.sql"
+]
+
+# The following section defines parameters related to exporting study data from
+# your athena database
+
+[export_config]
+
+# The following tables will be exported and labeled as aggregate count tables.
+# In most cases, tables should go in this list.
+
+count_list = [
+]
+
+# Some specific tables (like those produced by data metrics) are a special type
+# of tables, that are flat summary statistics tables. They should go in this list.
+
+flat_list = [
+]
+
+# Tables that shouldn't go through aggregation, but instead contain data about
+# the export itself, should be marked as metadata. Two types are expected as of this
+# writing: a `meta_date` table, outlining the period over which the study extends,
+# and a `meta_version` table, which should be incremented whenever the format of
+# your export tables changes. See the core study for examples of how to structure
+# these tables.
+
+meta_list = [
+]
+
+# The following section is for advanced/unusual study use cases
+
+# [options]
+
+# If you want to override the default schema name to an explicit one, you can include
+# the name of this schema here. 99% of the time, this is not the behavior you want -
+# you want library data to be in the same schema as your data source, since this allows
+# you to keep track of where your source data for a given study run came from.
+#
+# The intended use case for this is for static/slow moving data sets that are external
+# to your EHR data - this is typically things like coding systems.
+#
+# These should be read only use cases - if you want to do additional iterations with
+# the contents of one of these reference sets, do it in the study, not in the reference
+# itself.
+
+# use_dedicated_schema="alternate_schema_name"
