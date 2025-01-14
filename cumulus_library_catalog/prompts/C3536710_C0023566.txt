@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Progestin : (8R,9S,10R,13S,14S,17R)-13-ethyl-17-ethynyl-17-hydroxy- 1,2,6,7,8,9,10,11,12,13,14,15,16, 17- tetradecahydrocyclopenta[a] phenanthren-3-one" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

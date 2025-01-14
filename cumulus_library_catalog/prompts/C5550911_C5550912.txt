@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Insulin-like Growth Factor-1 Receptor Interactions: Insulin-like Growth Factor-1 Receptor Inhibitors " ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Proton Pump Inhibitor : 2-((R)-((3-methyl-4-(2,2,2-trifluoroethoxy)-2-pyridinyl)methyl)sulfinyl)-1H-benzimidazole" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

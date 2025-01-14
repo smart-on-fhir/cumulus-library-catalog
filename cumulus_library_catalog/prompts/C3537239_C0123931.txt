@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Topoisomerase Inhibitor: (S)-4,11-diethyl-4-hydroxy-3,14-dioxo-3,4,12,14-tetrahydro-1H-pyrano[3',4':6,7]indolizino[1,2-b]quinolin-9-yl 4-(2-(5-(3-(2,4-dihydroxy-5-isopropylphenyl)-5-hydroxy-4H-1,2,4-triazol-4-yl)-1H-indol-1-yl)ethyl)piperidine-1-carboxylate" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

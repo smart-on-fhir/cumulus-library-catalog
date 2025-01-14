@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Hydroxymethylglutaryl-CoA Reductase Inhibitor: (+)-(3R,5R)-3,5-dihydroxy-7-[(1S,2S,6S,8S,8aR)-6-hydroxy-2-methyl-8-{[(S)-2-methylbutyryl]oxy}-1,2,6,7,8,8a-hexahydro-1-naphthyl]heptanoic acid" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

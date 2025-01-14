@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Genetically-modified Autologous T Cells : Autologous T cells transduced with retroviral vector encoding an anti-CD-19 CD28/CD3-zeta chimeric antigen receptor" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

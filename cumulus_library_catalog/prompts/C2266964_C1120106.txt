@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Penem Antibacterial : (4R,5S,6S)-3-((3S,5S)-5-((3-carboxyphenyl)carbamoyl)pyrrolidin-3-ylthio)-6-((R)-1-hydroxyethyl)-4-methyl-7-oxo-1-aza-bicyclo[3.2.0]hept-2-ene-2-carboxylic acid" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

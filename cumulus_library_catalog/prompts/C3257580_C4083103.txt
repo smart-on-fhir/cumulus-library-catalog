@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Live Human Adenovirus Type 7 Vaccine : Human adenovirus B serotype 7 strain 55142 antigen" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

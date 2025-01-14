@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Azole Antifungal : 2-Pyridineethanol, α-(2,4difluorophenyl)-β β-difluoro- α-(1H-tetrazol-1-ylmethyl)-5-(4-(2,2,2-trifluoroethoxy)phenyl)-,(αR)" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

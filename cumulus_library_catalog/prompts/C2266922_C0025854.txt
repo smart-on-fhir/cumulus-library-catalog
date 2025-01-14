@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Thiazide-like Diuretic : 2-Methyl-3-o-tolyl-6-sulfamyl-7-chloro-1,2,3,4-tetrahydro-4-quinazolinone" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

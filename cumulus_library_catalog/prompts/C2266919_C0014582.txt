@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Anthracycline Topoisomerase Inhibitor : (1S,3S)-3-GLYCOLOYL-1,2,3,4,6,11-HEXAHYDRO-3,5,12-TRIHYDROXY-10-METHOXY-6,11-DIOXO-1-NAPHTHACENYL 3-AMINO-2,3,6-TRIDEOXY-.ALPHA.-L-ARABINO-HEXOPYRANOSIDE" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

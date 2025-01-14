@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "P2Y12 Platelet Aggregation Inhibitor: (1S,2S,3R,5S)-3-(7-((1R,2S)-2-(3,4-Difluorophenyl)cyclopropylamino)-5-(propylthio)-3H-(1,2,3)triazolo(4,5-d)pyrimidin-3-yl)-5-(2-hydroxyethoxy)cyclopentane-1,2-diol" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

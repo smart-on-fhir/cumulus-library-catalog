@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Radioactive Diagnostic Agent : 4-((1E)-2-(4-(2-(2-(2-((SUP 18(F))FLUOROETHOXY)ETHOXY)ETHOXY)PHENYL)ETH-1-EN-1-YL)-N-METHYLANILINE" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

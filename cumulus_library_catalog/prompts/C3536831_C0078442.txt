@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Adrenergic Receptor Agonist : 3-amino-9,13b-dihydro-1H-dibenz(c,f)imidazo(1,5-a)azepine" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

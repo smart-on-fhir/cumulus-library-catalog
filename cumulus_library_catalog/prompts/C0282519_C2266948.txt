@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Substance with reverse transcriptase inhibitor mechanism of action : HIV-1 Non-Nucleoside and Nucleoside Analogue Reverse Transcriptase Inhibitor" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

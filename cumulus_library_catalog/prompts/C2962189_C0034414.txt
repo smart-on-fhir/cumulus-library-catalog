@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Cytochrome P450 2D6 Inhibitor : (S)-(6-Methoxy-quinolin-4-yl)-((2R,5R)-5-vinyl-1-aza-bicyclo[2.2.2]oct-2-yl)-methanol" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

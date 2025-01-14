@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Kinase Inhibitor : 1h-pyrazole-4-carboxamide, 5-amino-3-(4-(((5-fluoro-2-methoxybenzoyl)amino)methyl)phenyl)-1-((1s)-2,2,2-trifluoro-1-methylethyl)-" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

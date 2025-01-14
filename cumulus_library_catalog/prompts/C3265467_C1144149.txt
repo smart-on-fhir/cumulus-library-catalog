@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Thalidomide Analog : 3-(4-Amino-1-oxoisoindolin-2-yl)piperidine-2,6-dione" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

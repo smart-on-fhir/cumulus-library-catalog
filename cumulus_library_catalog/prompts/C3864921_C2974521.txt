@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Protease-activated Receptor-1 (PAR-1) Antagonist: Carbamic acid, [(1R,3aR,4aR,6R,8aR,9S,9aS)-9-[(1E)-2-[5-(3-fluorophenyl)-2- pyridinyl]ethenyl]dodecahydro-1-methyl-3-oxonaphtho[2,3-c]furan-6-yl]-, ethyl ester" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Fluoroquinolone Antibacterial : 1-Cyclopropyl-6-fluoro-1,4-dihydro-8-methoxy-7-((4as,7as)-octahydro-6H-pyrrolo(3,4-b)pyridin-6-yl)-4-oxo-3-quinolinecarboxylic acid" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

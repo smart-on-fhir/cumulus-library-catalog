@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Antiarrhythmic : 2-Butyl-3-(3,5-diiodo-4-(2-diethylaminoethoxy)benzoyl)benzofuran" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Fluoroquinolone Antibacterial : (S)-(-)-9-fluoro-3-methyl-10-(4-methyl-1-piperazinyl)-7-oxo-2,3-dihydro-7H-pyrido[1,2,3-de][1,4]benzooxazine-6-carboxylic acid" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

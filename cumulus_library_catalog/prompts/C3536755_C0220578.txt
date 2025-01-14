@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Serotonin subtype 3 (5HT-3) Receptor Antagonist: 2-(1-Azabicyclo(2.2.2)oct-3-yl)-2,3,3a,4,5,6-hexahydro-1H-benz(de)isoquinolin-1-one" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

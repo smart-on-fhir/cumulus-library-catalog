@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Calcitonin Gene-related Peptide Receptor Antagonist : 1-piperidinecarboxamide, 4-(1,2-dihydro-2-oxo-3-quinolinyl)-n-((1r)-1-((7-methyl-1h-indazol-5-yl)methyl)-2-(4-(1-methyl-4-piperidinyl)-1-piperazinyl)-2-oxoethyl)-" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

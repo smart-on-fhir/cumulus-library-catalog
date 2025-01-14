@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Renal Dehydropeptidase Inhibitor : (L)-7-(2-Amino-2-carboxy-ethylsulfanyl)-2-[(2,2-dimethyl-cyclopropanecarbonyl)-amino]-hept-2-enoic acid" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

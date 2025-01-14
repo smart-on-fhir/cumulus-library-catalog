@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Dopamine-2 Receptor Antagonist : 4-Amino-N-((1-ethyl-2-pyrrolidinyl)methyl)-5-(ethylsulfonyl)-2-methoxybenzamide" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Inactivated Human Papillomavirus Vaccine : Antigen of Human papillomavirus type 6 L1 capsid protein " ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Cephalosporin Antibacterial : (6R,7R,Z)-3-(acetoxymethyl)-7-(2-(2-aminothiazol-4-yl)-2-(methoxyimino)acetamido)-8-oxo-5-thia-1-aza-bicyclo[4.2.0]oct-2-ene-2-carboxylic acid" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

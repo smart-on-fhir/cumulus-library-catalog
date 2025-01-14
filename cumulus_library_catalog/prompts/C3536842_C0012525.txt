@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Antidiarrheal : 2,2-Diphenyl-4-(4-carbethoxy-4-phenylpiperidino)butyronitrile" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

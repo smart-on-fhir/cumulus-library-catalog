@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Cholinergic Antagonist: alpha-(Hydroxymethyl)benzeneacetic acid 9-methyl-3-oxa-9-azatricyclo(3.3.1.0(2.4))non-7-yl ester" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

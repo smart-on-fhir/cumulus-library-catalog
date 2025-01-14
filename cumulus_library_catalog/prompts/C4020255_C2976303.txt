@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Hepatitis C Virus Nucleotide Analog NS5B Polymerase Inhibitor : S)-Isopropyl 2-((S)-(((2R,3R,4R,5R)-5-(2,4-dioxo-3,4- dihydropyrimidin-1(2H)-yl)-4-fluoro-3-hydroxy-4-methyltetrahydrofuran-2-yl)methoxy)- (phenoxy)phosphorylamino)propanoate" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

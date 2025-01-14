@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Sodium-Glucose Cotransporter 2 Inhibitor : (2S,3R,4R,5S,6R)-2-(4-Chloro-3-(4-ethoxybenzyl)phenyl)-6- (hydroxymethyl)tetrahydro-2H-pyran-3,4,5-triol" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "B-Cell Lymphoma-2 Protein Inhibitor: 4-(4-((2-(4-chlorophenyl)-4,4-dimethylcyclohex-1-en-1-yl)methyl)piperazin-1-yl)-N-((3-nitro-4-((tetrahydro-2H-pyran-4-ylmethyl)amino)phenyl)sulfonyl)-2-(1H-pyrrolo(2,3-b)pyridin-5-yloxy)benzamide" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

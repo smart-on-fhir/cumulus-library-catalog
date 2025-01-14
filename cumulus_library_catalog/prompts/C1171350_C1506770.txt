@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Kinase Inhibitor : N-(3-chloro-4-((3-fluorophenyl)methoxy)phenyl)-6-(5-(((2-(methylsulfonyl)ethyl)amino)methyl)-2-furanyl)-4-quinazolinamine" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

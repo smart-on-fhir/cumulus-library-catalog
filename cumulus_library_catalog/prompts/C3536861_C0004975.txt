@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Thiazide-class Diuretic: ±-3-benzyl-3,4-dihydro-6-(trifluoromethyl)-2H-1,2,4-benzothiadiazine-7-sulfonamide 1,1-dioxide" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

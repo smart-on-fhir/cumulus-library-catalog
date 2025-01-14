@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Thiazide Diuretic : 6-Chloro-1,1-dioxo-1,2-dihydro-1lambda*6*-benzo[1,2,4]thiadiazine-7-sulfonic acid amide" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "HIV Protease Inhibitor: (3R,3aS,6aR)-tetrahydro-2H-furo[2,3-b]furan-3-yl (2S,3R)-4-(4-amino-N-neopentylphenylsulfonamido)-3-hydroxy-1-phenylbutan-2-ylcarbamate" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

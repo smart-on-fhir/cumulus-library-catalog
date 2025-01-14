@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Gonadotropin Releasing Hormone Receptor Agonist : 5-oxo-L-prolyl-L-histidyl-L-tryptophyl-L-seryl-L-tyrosyl-Nτ-benzyl-D-histidyl-L-leucyl-L-arginyl-N-ethyl-L-prolinamide" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

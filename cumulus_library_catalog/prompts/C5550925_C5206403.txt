@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Triterpenoid Antifungal : (1S,4AR,6AS,7R,8R,10AR,10BR,12AR,14R,15R)-15-((2R)- 2-AMINO-2,3,3-TRIMETHYLBUTOXY)-1,6A,8,10A-TETRAMETHYL-8- ((2R)-3-METHYLBUTAN-2-YL)-14-(5-(PYRIDIN-4-YL)-1H-1,2,4- TRIAZOL-1-YL)-1,6,6A,7,8,9,10,10A,10B,11,12,12A-DODECAHYDRO-2H,4H-1,4A-PROPANOPHENANTHRO" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

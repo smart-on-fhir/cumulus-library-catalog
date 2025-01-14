@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Antisense Oligonucleotide: DNA, D((2'-O-(2-METHOXYETHYL))M5RC-SP-(2'-O-(2-METHOXYETHYL))RA-(2'-O-(2-METHOXYETHYL))RG-SP-(2'-O-(2-METHOXYETHYL))RG-(2'-O-(2-METHOXYETHYL))RA-SP-T-SP-A-SP-M5C-SP-A-SP-T-SP-T-SP-T-SP-M5C-SP-T-SP-A-SP-(2'-O-(2-METHOXYETHYL))M5RC-(2'-O-(2-METHOXYETHYL))R" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

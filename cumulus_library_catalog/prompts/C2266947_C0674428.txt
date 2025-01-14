@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Human Immunodeficiency Virus 1 Non-Nucleoside Analog Reverse Transcriptase Inhibitor : (S)-6-chloro-4-(Cyclopropylethynyl)-1,4-dihydro-(S)-6-chloro-4-(cyclopropylethynyl)-1,4-dihydro-4-(trifluoromethyl)-2H-3,1-benzoxazin-2-one4-(trifluoromethyl)-2H-3,1-benzoxazin-2-one" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

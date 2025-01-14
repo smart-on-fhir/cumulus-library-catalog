@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Echinocandin Antifungal : (4R,5S)-5-((2-Aminoethyl)amino)-N(sup 2)-(10,12-dimethyltetradecanoyl)-4-hydroxy-L-ornithyl-L-threonyl-trans-4-hydroxy-L-prolyl-(S)-4-hydroxy-4-(p-hydroxyphenyl)-L-threonyl-threo-3-hydroxy-L-ornithyl-trans-3-hydroxy-L-proline cyclic (6-1)-peptide" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

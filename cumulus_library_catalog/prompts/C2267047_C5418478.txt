@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Respiratory Syncytial Virus Anti-F Protein Monoclonal Antibody : Immunoglobulin g1-kappa, anti-(human respiratory syncytial virus fusion glycoprotein f0 (protein f))human monoclonal antibody.gamma.1 heavy chain (1-456) (human vh (homo sapiens ighv1-69*01(ighd)-ighj4*01 (90.1%)) (8.8.19) (1-126) -homo sapiens ighg1*03" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

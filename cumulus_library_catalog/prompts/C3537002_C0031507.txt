@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Anti-epileptic Agent : 5,5-diphenylimidazolidine-2,4-dione" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

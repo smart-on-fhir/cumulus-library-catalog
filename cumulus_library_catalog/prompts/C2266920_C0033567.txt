@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Prostacycline-class Vasodilator: (5Z,9α,11α,13E,15S)-6,9-epoxy-11,15-dihydroxyprosta-5,13-dien-1-oic acid" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}

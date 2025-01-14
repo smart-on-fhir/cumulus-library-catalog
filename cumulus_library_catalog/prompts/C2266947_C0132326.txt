@@ -1,0 +1,9 @@
+What are the medications associated with the drug class: "Human Immunodeficiency Virus 1 Non-Nucleoside Analog Reverse Transcriptase Inhibitor : 11-cyclopropyl-5,11-dihydro-4-methyl-6H-dipyrido(3,2-b:2',3'-e)(1,4)diazepin-6-one" ?
+
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
+{"ingredient":  [list of ingredients]}
+{"generic": [list of generic names]}
+{"brand": [list of brand names]}
