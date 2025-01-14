@@ -129,7 +129,7 @@ class DrugKeyword:
 
     def key(self):
         short = hashlib.sha256(self.label.lower().encode()).hexdigest()[:8]
-        return f'alias_{short}'
+        return f'alias_{self.tty}_{short}'
 
     def path_prompt(self) -> Path:
         return path_prompts(self.key() + '.txt')
