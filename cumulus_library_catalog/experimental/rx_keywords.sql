@@ -82,17 +82,17 @@ keywords_filtered AS
 )
 select * from keywords_filtered order by cui1, keyword;
 
+select distinct tty, str2 as label
+from
+medrt_drugs_keywords,
+umls.tty_description
+where
+medrt_drugs_keywords.tty2 = umls.tty_description.tty
+order by tty, str2
+
+
 --  ###################################################################
---  Use GPT4 to create synonym keyword list?
-
-
-What are the medications  associated with the drug class
-"Cellular Death Alteration , Decreased Cellular Death".
-
-Your output is a JSON dictionary with {key:value}  pairs
-{"ingredient":  [list of ingredients]}
-{"generic": [list of generic names]}
-{"brand": [list of brand names] }
+--  Use GPT4 to create synonym keyword list
 
 --  * PE (Physiologic Effects)
 --    https://uts.nlm.nih.gov/uts/umls/concept/C1372798
@@ -105,8 +105,6 @@ Your output is a JSON dictionary with {key:value}  pairs
 
 -- **** Metabolic Activity Alteration
 -- https://uts.nlm.nih.gov/uts/umls/concept/C1372744
-
-
 
 --    Cardiovascular Activity Alteration
 --    Dermatologic Activity Alteration

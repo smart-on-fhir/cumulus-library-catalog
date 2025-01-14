@@ -1,4 +1,6 @@
-import os, csv
+import os
+import csv
+import hashlib
 from typing import List
 from pathlib import Path
 
@@ -22,14 +24,22 @@ Your input is a drug class from the MED-RT (Medication reference Terminology).
 I will now prompt you with a series of drug classes and you will respond with JSON.  
 """
 
+LLM_TTY = {
+    'PIN': 'precise ingredient',
+    'IN': 'ingredient',
+    'GN': 'generic name',
+    'BN': 'brand name',
+    'SU': 'active substance'
+}
+
 ###############################################################################
 # Clean text
 ###############################################################################
-CLEAN_WORDS = ['[MoA]', '[EPC]', '[PE]', '[PK]', '[TC]', '[EXT]',
-               '(substance)', '(medicinal product)', '(product)']
+CLEAN_TEXT = ['[MoA]', '[EPC]', '[PE]', '[PK]', '[TC]', '[EXT]',
+              '(substance)', '(medicinal product)', '(product)']
 
-def clean_words(drug_class: str) -> str:
-    for remove in CLEAN_WORDS:
+def clean_text(drug_class: str) -> str:
+    for remove in CLEAN_TEXT:
         drug_class = drug_class.replace(remove, '')
     return drug_class
 
@@ -46,6 +56,8 @@ def path_prompts(filename: str) -> Path:
 def path_medrt_drugs_leaf(filename='medrt_drugs_leaf.csv'):
     return path_download(filename)
 
+def path_medrt_keywords(filename='medrt_drugs_keywords.csv'):
+    return path_download(filename)
 
 ###############################################################################
 # Drug Class
@@ -54,7 +66,7 @@ def path_medrt_drugs_leaf(filename='medrt_drugs_leaf.csv'):
 class DrugClass:
     cui1: str = None
     cui2: str = None
-    medrt: str = None
+    label: str = None
 
     def __init__(self, cui1: str, cui2: str, medrt: str):
         """
@@ -64,21 +76,18 @@ class DrugClass:
         """
         self.cui1 = cui1
         self.cui2 = cui2
-        self.medrt = medrt
+        self.label = medrt
 
     def key(self):
         return f'{self.cui1}_{self.cui2}'
 
-    def filename(self):
-        return self.key() + '.txt'
-
-    def filepath(self):
-        return path_prompts(self.filename())
+    def path_prompt(self):
+        return path_prompts(self.key() + '.txt')
 
     def prompt(self) -> str:
-        cleaner = clean_words(self.medrt)
-        drug_class = f'What are the medications associated with the drug class: "{cleaner}" ?\n'
-        return drug_class + LLM_RESPOND_JSON
+        _drug_class = clean_text(self.label)
+        question = f'What are the medications associated with the drug class: "{_drug_class}" ?\n'
+        return question + LLM_RESPOND_JSON
 
     @staticmethod
     def load_saved() -> List:
@@ -93,28 +102,83 @@ class DrugClass:
                 cui2 = row[1]
                 medrt = row[2]
 
-                if cui1 not in seen.keys():
-                    seen[cui1] = list()
-                if cui2 not in seen.get(cui1):
-                    output.append(DrugClass(cui1, cui2, medrt))
-                    seen[cui1].append(cui2)
+                if cui1 != 'CUI1': #skip header
+                    if cui1 not in seen.keys():
+                        seen[cui1] = list()
+                    if cui2 not in seen.get(cui1):
+                        output.append(DrugClass(cui1, cui2, medrt))
+                        seen[cui1].append(cui2)
         return output
+
+###############################################################################
+# DrugAlias
+###############################################################################
+
+class DrugKeyword:
+    tty: str = None
+    label: str = None
+
+    def __init__(self, tty: str, text: str):
+        """
+        :param tty: CUI of the MED-RT derived "parent".
+        :param text: CUI of the MED-RT dervied "child".
+        :param medrt: parent:child name to supply to LLM.
+        """
+        self.tty = tty
+        self.label = text
+
+    def key(self):
+        short = hashlib.sha256(self.label.lower().encode()).hexdigest()[:8]
+        return f'alias_{short}'
+
+    def path_prompt(self) -> Path:
+        return path_prompts(self.key() + '.txt')
+
+    def prompt(self) -> str:
+        _label = self.label.title()
+        _tty = LLM_TTY[self.tty]
+        question = f'What are the medications associated with the {_tty} "{_label}" ?\n'
+        return question + LLM_RESPOND_JSON
+
+    @staticmethod
+    def load_saved() -> List:
+        """
+        :return: List[DrugClass]
+        """
+        output = list()
+        with open(path_medrt_keywords(), 'r') as csv_file:
+            for row in csv.reader(csv_file, delimiter=',', quotechar='"'):
+                tty = row[0]
+                label = row[1]
+                if tty in LLM_TTY.keys():
+                    output.append(DrugKeyword(tty, label))
+        return output
+
 
 ###############################################################################
 # Make
 ###############################################################################
 
-def make_llm_prompts() -> List[str]:
+def make_drug_class() -> List[str]:
     manifest = list()
     for drug_class in DrugClass.load_saved():
-        with open(drug_class.filepath(), 'w') as fp:
+        with open(drug_class.path_prompt(), 'w') as fp:
             text = drug_class.prompt()
             fp.write(text)
-            manifest.append(drug_class.filepath())
+            manifest.append(drug_class.path_prompt())
+    return manifest
+
+def make_drug_alias() -> List[str]:
+    manifest = list()
+    for drug_alias in DrugKeyword.load_saved():
+        with open(drug_alias.path_prompt(), 'w') as fp:
+            text = drug_alias.prompt()
+            fp.write(text)
+            manifest.append(drug_alias.path_prompt())
     return manifest
 
 
 if __name__ == "__main__":
-    outputs = make_llm_prompts()
+    outputs = make_drug_class() + make_drug_alias()
     outputs = [str(f) for f in outputs]
     print('\n'.join(outputs))
