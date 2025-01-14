@@ -56,17 +56,20 @@ select  distinct
         C1.SAB      as SAB1,
         C1.CODE     as CODE1,
         C1.TTY      as TTY1,
+        C1.STR      as STR1,
         R.CUI2,
         C2.SAB      as SAB2,
         C2.CODE     as CODE2,
-        C2.TTY      as TTY2
+        C2.TTY      as TTY2,
+        C2.STR      as STR2
 from    catalog.medrt_is_a  as R,
         catalog.mrconso_drugs as C1,
         catalog.mrconso_drugs as C2
 where   C1.CODE != 'NOCODE'
 and     C2.CODE != 'NOCODE'
 and     R.CUI1 = C1.CUI
-and     R.CUI2 = C2.CUI;
+and     R.CUI2 = C2.CUI
+order by R.CUI1, R.CUI2;
 
 drop    table if exists catalog.medrt_cui;
 create  table           catalog.medrt_cui AS

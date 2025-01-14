@@ -1,0 +1,20 @@
+{
+  "ingredient": [
+    "Methyldopa",
+    "Clonidine",
+    "Guanfacine",
+    "Reserpine"
+  ],
+  "generic": [
+    "Methyldopa",
+    "Clonidine",
+    "Guanfacine",
+    "Reserpine"
+  ],
+  "brand": [
+    "Aldomet",
+    "Catapres",
+    "Tenex",
+    "Serpasil"
+  ]
+}

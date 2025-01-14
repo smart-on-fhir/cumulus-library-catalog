@@ -1,0 +1,38 @@
+{
+  "ingredient": [
+    "Cholestyramine",
+    "Colestipol",
+    "Colesevelam",
+    "Ezetimibe",
+    "Atorvastatin",
+    "Rosuvastatin",
+    "Simvastatin",
+    "Pravastatin",
+    "Niacin",
+    "Omega-3 fatty acids"
+  ],
+  "generic": [
+    "Cholestyramine",
+    "Colestipol",
+    "Colesevelam",
+    "Ezetimibe",
+    "Atorvastatin",
+    "Rosuvastatin",
+    "Simvastatin",
+    "Pravastatin",
+    "Niacin",
+    "Omega-3 fatty acids"
+  ],
+  "brand": [
+    "Questran",
+    "Colestid",
+    "Welchol",
+    "Zetia",
+    "Lipitor",
+    "Crestor",
+    "Zocor",
+    "Pravachol",
+    "Niaspan",
+    "Lovaza"
+  ]
+}

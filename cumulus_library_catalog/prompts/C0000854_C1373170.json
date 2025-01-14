@@ -1,0 +1,5 @@
+{
+  "ingredient": ["Griseofulvin", "Digoxin", "Cyclosporine", "Phenytoin", "Methotrexate", "Levothyroxine", "Levodopa", "Various antibiotics", "Antiretrovirals"],
+  "generic": ["Griseofulvin", "Digoxin", "Cyclosporine", "Phenytoin", "Methotrexate", "Levothyroxine", "Levodopa", "Specific antibiotics (e.g., amoxicillin)", "Specific antiretrovirals (e.g., tenofovir)"],
+  "brand": ["Gris-PEG", "Lanoxin", "Neoral", "Dilantin", "Trexall", "Synthroid", "Sinemet", "Various branded antibiotics", "Various branded antiretrovirals"]
+}
