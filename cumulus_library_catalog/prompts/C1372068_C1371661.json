@@ -1,0 +1,26 @@
+{
+  "ingredient": [
+    "Metformin",
+    "Pioglitazone",
+    "Rosiglitazone",
+    "Glipizide",
+    "Glyburide",
+    "Glimepiride"
+  ],
+  "generic": [
+    "Metformin",
+    "Pioglitazone",
+    "Rosiglitazone",
+    "Glipizide",
+    "Glyburide",
+    "Glimepiride"
+  ],
+  "brand": [
+    "Glucophage",
+    "Actos",
+    "Avandia",
+    "Glucotrol",
+    "Diabeta",
+    "Amaryl"
+  ]
+}

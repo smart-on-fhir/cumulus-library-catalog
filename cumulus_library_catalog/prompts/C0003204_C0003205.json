@@ -1,0 +1,38 @@
+{
+  "ingredient": [
+    "Chlorhexidine",
+    "Povidone-iodine",
+    "Hydrogen peroxide",
+    "Isopropyl alcohol",
+    "Ethanol",
+    "Benzalkonium chloride",
+    "Hexachlorophene",
+    "Iodine",
+    "Sodium hypochlorite",
+    "Silver sulfadiazine"
+  ],
+  "generic": [
+    "Chlorhexidine",
+    "Povidone-iodine",
+    "Hydrogen peroxide",
+    "Isopropyl alcohol",
+    "Ethanol",
+    "Benzalkonium chloride",
+    "Hexachlorophene",
+    "Iodine",
+    "Sodium hypochlorite",
+    "Silver sulfadiazine"
+  ],
+  "brand": [
+    "Hibiclens",
+    "Betadine",
+    "Peroxide",
+    "Isopropanol",
+    "Purell",
+    "Zephiran",
+    "Phisohex",
+    "Lugol's Solution",
+    "Clorox",
+    "Silvadene"
+  ]
+}

@@ -7,16 +7,19 @@ from pathlib import Path
 ###############################################################################
 
 LLM_RESPOND_JSON = """
-Your output is a JSON dictionary with {key:value}  pairs
+Do NOT list sources. 
+Do NOT explain your answer.
+ 
+Respond using a JSON dictionary with {key:value}  pairs
 {"ingredient":  [list of ingredients]}
 {"generic": [list of generic names]}
-{"brand": [list of brand names] }
+{"brand": [list of brand names]}
 """
 
 LLM_INSTRUCTION = """
 You are a helpful assistant tasked with providing medication names. 
 Your input is a drug class from the MED-RT (Medication reference Terminology). 
-I will now prompt you with a series of drug classes, and you will respond with JSON. 
+I will now prompt you with a series of drug classes and you will respond with JSON.  
 """
 
 ###############################################################################

@@ -1,0 +1,42 @@
+{
+  "ingredient": [
+    "Palbociclib",
+    "Ribociclib",
+    "Erlotinib",
+    "Ketamine",
+    "Levothyroxine",
+    "Fexofenadine",
+    "Ciclosporin",
+    "Tacrolimus",
+    "Dihydropyridines"
+  ],
+  "generic": [
+    "Palbociclib",
+    "Ribociclib",
+    "Erlotinib",
+    "Ketamine",
+    "Levothyroxine",
+    "Fexofenadine",
+    "Ciclosporin",
+    "Tacrolimus",
+    "Felodipine",
+    "Nicardipine",
+    "Nifedipine",
+    "Nisoldipine",
+    "Nitrendipine"
+  ],
+  "brand": [
+    "Ibrance",
+    "Kisqali",
+    "Tarceva",
+    "Synthroid",
+    "Allegra",
+    "Neoral",
+    "Prograf",
+    "Plendil",
+    "Cardene",
+    "Procardia",
+    "Sular",
+    "Bayotensin"
+  ]
+}

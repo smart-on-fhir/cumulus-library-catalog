@@ -1,0 +1,23 @@
+{
+  "ingredient": [
+    "Phenylephrine",
+    "Pseudoephedrine",
+    "Oxymetazoline",
+    "Xylometazoline",
+    "Naphazoline"
+  ],
+  "generic": [
+    "Phenylephrine",
+    "Pseudoephedrine",
+    "Oxymetazoline",
+    "Xylometazoline",
+    "Naphazoline"
+  ],
+  "brand": [
+    "Sudafed PE",
+    "Sudafed",
+    "Afrin",
+    "Otrivin",
+    "Privine"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "ingredient": [
+    "Benzodiazepines",
+    "Barbiturates",
+    "Baclofen"
+  ],
+  "generic": [
+    "Diazepam",
+    "Lorazepam",
+    "Phenobarbital",
+    "Baclofen"
+  ],
+  "brand": [
+    "Valium",
+    "Ativan",
+    "Luminal",
+    "Lioresal"
+  ]
+}

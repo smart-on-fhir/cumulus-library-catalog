@@ -1,0 +1,44 @@
+{
+  "ingredient": [
+    "Nitroglycerin",
+    "Isosorbide dinitrate",
+    "Isosorbide mononitrate",
+    "Amlodipine",
+    "Nifedipine",
+    "Verapamil",
+    "Diltiazem",
+    "Metoprolol",
+    "Atenolol",
+    "Propranolol",
+    "Ranolazine",
+    "Ivabradine"
+  ],
+  "generic": [
+    "Nitroglycerin",
+    "Isosorbide dinitrate",
+    "Isosorbide mononitrate",
+    "Amlodipine",
+    "Nifedipine",
+    "Verapamil",
+    "Diltiazem",
+    "Metoprolol",
+    "Atenolol",
+    "Propranolol",
+    "Ranolazine",
+    "Ivabradine"
+  ],
+  "brand": [
+    "Nitrostat",
+    "Isordil",
+    "Imdur",
+    "Norvasc",
+    "Procardia",
+    "Calan",
+    "Cardizem",
+    "Lopressor",
+    "Tenormin",
+    "Inderal",
+    "Ranexa",
+    "Corlanor"
+  ]
+}

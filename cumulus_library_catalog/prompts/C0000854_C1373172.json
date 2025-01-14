@@ -1,0 +1,38 @@
+{
+  "ingredient": [
+    "Paracetamol",
+    "Ibuprofen",
+    "Aspirin",
+    "Metformin",
+    "Amoxicillin",
+    "Omeprazole",
+    "Atorvastatin",
+    "Lisinopril",
+    "Metoprolol",
+    "Simvastatin"
+  ],
+  "generic": [
+    "Paracetamol",
+    "Ibuprofen",
+    "Aspirin",
+    "Metformin",
+    "Amoxicillin",
+    "Omeprazole",
+    "Atorvastatin",
+    "Lisinopril",
+    "Metoprolol",
+    "Simvastatin"
+  ],
+  "brand": [
+    "Tylenol",
+    "Advil",
+    "Bayer",
+    "Glucophage",
+    "Amoxil",
+    "Prilosec",
+    "Lipitor",
+    "Prinivil",
+    "Lopressor",
+    "Zocor"
+  ]
+}

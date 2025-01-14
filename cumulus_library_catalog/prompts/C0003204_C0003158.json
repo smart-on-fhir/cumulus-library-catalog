@@ -1,0 +1,38 @@
+{
+  "ingredient": [
+    "Albendazole",
+    "Mebendazole",
+    "Ivermectin",
+    "Praziquantel",
+    "Pyrantel pamoate",
+    "Levamisole",
+    "Diethylcarbamazine",
+    "Niclosamide",
+    "Oxamniquine",
+    "Piperazine"
+  ],
+  "generic": [
+    "Albendazole",
+    "Mebendazole",
+    "Ivermectin",
+    "Praziquantel",
+    "Pyrantel pamoate",
+    "Levamisole",
+    "Diethylcarbamazine",
+    "Niclosamide",
+    "Oxamniquine",
+    "Piperazine"
+  ],
+  "brand": [
+    "Albenza",
+    "Vermox",
+    "Stromectol",
+    "Biltricide",
+    "Antiminth",
+    "Ergamisol",
+    "Hetrazan",
+    "Niclocide",
+    "Vansil",
+    "Antepar"
+  ]
+}

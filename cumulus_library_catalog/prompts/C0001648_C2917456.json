@@ -1,0 +1,26 @@
+{
+  "ingredient": [
+    "Epinephrine",
+    "Norepinephrine",
+    "Ephedrine",
+    "Pseudoephedrine",
+    "Dopamine",
+    "Dobutamine"
+  ],
+  "generic": [
+    "Epinephrine",
+    "Norepinephrine",
+    "Ephedrine",
+    "Pseudoephedrine",
+    "Dopamine",
+    "Dobutamine"
+  ],
+  "brand": [
+    "Adrenalin",
+    "Levophed",
+    "Akovaz",
+    "Sudafed",
+    "Intropin",
+    "Dobutrex"
+  ]
+}

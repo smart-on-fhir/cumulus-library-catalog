@@ -1,0 +1,35 @@
+{
+  "ingredient": [
+    "Morphine",
+    "Hydromorphone",
+    "Oxymorphone",
+    "Methadone",
+    "Fentanyl",
+    "Oxycodone",
+    "Hydrocodone",
+    "Codeine",
+    "Meperidine"
+  ],
+  "generic": [
+    "Morphine",
+    "Hydromorphone",
+    "Oxymorphone",
+    "Methadone",
+    "Fentanyl",
+    "Oxycodone",
+    "Hydrocodone",
+    "Codeine",
+    "Meperidine"
+  ],
+  "brand": [
+    "MS Contin",
+    "Dilaudid",
+    "Opana",
+    "Dolophine",
+    "Duragesic",
+    "OxyContin",
+    "Vicodin",
+    "Tylenol with Codeine",
+    "Demerol"
+  ]
+}
