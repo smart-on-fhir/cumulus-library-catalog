@@ -1,0 +1,29 @@
+{
+  "ingredient": [
+    "Insulin",
+    "Metformin",
+    "Pioglitazone",
+    "Rosiglitazone",
+    "Glipizide",
+    "Glyburide",
+    "Glimepiride"
+  ],
+  "generic": [
+    "Insulin",
+    "Metformin",
+    "Pioglitazone",
+    "Rosiglitazone",
+    "Glipizide",
+    "Glyburide",
+    "Glimepiride"
+  ],
+  "brand": [
+    "Humulin",
+    "Glucophage",
+    "Actos",
+    "Avandia",
+    "Glucotrol",
+    "Diabeta",
+    "Amaryl"
+  ]
+}

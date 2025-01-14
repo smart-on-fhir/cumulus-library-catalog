@@ -1,0 +1,38 @@
+{
+  "ingredient": [
+    "Amiodarone",
+    "Lidocaine",
+    "Procainamide",
+    "Quinidine",
+    "Flecainide",
+    "Propafenone",
+    "Sotalol",
+    "Dofetilide",
+    "Ibutilide",
+    "Disopyramide"
+  ],
+  "generic": [
+    "Amiodarone",
+    "Lidocaine",
+    "Procainamide",
+    "Quinidine",
+    "Flecainide",
+    "Propafenone",
+    "Sotalol",
+    "Dofetilide",
+    "Ibutilide",
+    "Disopyramide"
+  ],
+  "brand": [
+    "Cordarone",
+    "Xylocaine",
+    "Procan",
+    "Quinidex",
+    "Tambocor",
+    "Rythmol",
+    "Betapace",
+    "Tikosyn",
+    "Corvert",
+    "Norpace"
+  ]
+}

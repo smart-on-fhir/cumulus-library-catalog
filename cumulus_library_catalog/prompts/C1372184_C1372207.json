@@ -1,0 +1,26 @@
+{
+  "ingredient": [
+    "Fluoxetine",
+    "Sertraline",
+    "Escitalopram",
+    "Ketamine",
+    "7,8-Dihydroxyflavone",
+    "Selegiline"
+  ],
+  "generic": [
+    "Fluoxetine",
+    "Sertraline",
+    "Escitalopram",
+    "Ketamine",
+    "7,8-Dihydroxyflavone",
+    "Selegiline"
+  ],
+  "brand": [
+    "Prozac",
+    "Zoloft",
+    "Lexapro",
+    "Ketalar",
+    "Tropoflavin",
+    "Eldepryl"
+  ]
+}
