@@ -3,6 +3,7 @@ import csv
 import hashlib
 from typing import List
 from pathlib import Path
+from cumulus_library_catalog.rx_keywords import filetool
 
 ###############################################################################
 # LLM Textual constants.
@@ -11,7 +12,7 @@ from pathlib import Path
 LLM_RESPOND_JSON = """
 Do NOT list sources. 
 Do NOT explain your answer.
- 
+
 Respond using a JSON dictionary with {key:value}  pairs
 {"ingredient":  [list of ingredients]}
 {"generic": [list of generic names]}
@@ -38,26 +39,12 @@ LLM_TTY = {
 CLEAN_TEXT = ['[MoA]', '[EPC]', '[PE]', '[PK]', '[TC]', '[EXT]',
               '(substance)', '(medicinal product)', '(product)']
 
+
 def clean_text(drug_class: str) -> str:
     for remove in CLEAN_TEXT:
         drug_class = drug_class.replace(remove, '')
     return drug_class
 
-###############################################################################
-# Paths
-###############################################################################
-
-def path_download(filename: str) -> Path:
-    return Path(os.path.join(os.path.dirname(__file__)), '..', 'download', filename)
-
-def path_prompts(filename: str) -> Path:
-    return Path(os.path.join(os.path.dirname(__file__)), '..', 'prompts', filename)
-
-def path_medrt_drugs_leaf(filename='medrt_drugs_leaf.csv'):
-    return path_download(filename)
-
-def path_medrt_keywords(filename='medrt_drugs_keywords.csv'):
-    return path_download(filename)
 
 ###############################################################################
 # Drug Class
@@ -82,7 +69,7 @@ class DrugClass:
         return f'{self.cui1}_{self.cui2}'
 
     def path_prompt(self):
-        return path_prompts(self.key() + '.txt')
+        return filetool.path_prompts(self.key() + '.txt')
 
     def prompt(self) -> str:
         _drug_class = clean_text(self.label)
@@ -96,13 +83,13 @@ class DrugClass:
         """
         seen = dict()
         output = list()
-        with open(path_medrt_drugs_leaf(), 'r') as csv_file:
+        with open(filetool.path_medrt_drugs_leaf(), 'r') as csv_file:
             for row in csv.reader(csv_file, delimiter=',', quotechar='"'):
                 cui1 = row[0]
                 cui2 = row[1]
                 medrt = row[2]
 
-                if cui1 != 'CUI1': #skip header
+                if cui1 != 'CUI1':  # skip header
                     if cui1 not in seen.keys():
                         seen[cui1] = list()
                     if cui2 not in seen.get(cui1):
@@ -122,7 +109,7 @@ class DrugKeyword:
         """
         :param tty: CUI of the MED-RT derived "parent".
         :param text: CUI of the MED-RT dervied "child".
-        :param medrt: parent:child name to supply to LLM.
+        :param rx_keywords: parent:child name to supply to LLM.
         """
         self.tty = tty
         self.label = text
@@ -132,7 +119,7 @@ class DrugKeyword:
         return f'alias_{self.tty}_{short}'
 
     def path_prompt(self) -> Path:
-        return path_prompts(self.key() + '.txt')
+        return filetool.path_prompts(self.key() + '.txt')
 
     def prompt(self) -> str:
         _label = self.label.title()
@@ -146,7 +133,7 @@ class DrugKeyword:
         :return: List[DrugClass]
         """
         output = list()
-        with open(path_medrt_keywords(), 'r') as csv_file:
+        with open(filetool.path_medrt_keywords(), 'r') as csv_file:
             for row in csv.reader(csv_file, delimiter=',', quotechar='"'):
                 tty = row[0]
                 label = row[1]
@@ -168,7 +155,7 @@ def make_drug_class() -> List[str]:
             manifest.append(drug_class.path_prompt())
     return manifest
 
-def make_drug_alias() -> List[str]:
+def make_drug_keywords() -> List[str]:
     manifest = list()
     for drug_alias in DrugKeyword.load_saved():
         with open(drug_alias.path_prompt(), 'w') as fp:
@@ -179,6 +166,6 @@ def make_drug_alias() -> List[str]:
 
 
 if __name__ == "__main__":
-    outputs = make_drug_class() + make_drug_alias()
+    outputs = make_drug_class() + make_drug_keywords()
     outputs = [str(f) for f in outputs]
     print('\n'.join(outputs))
