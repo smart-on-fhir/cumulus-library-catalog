@@ -1,4 +1,4 @@
-study_prefix = "catalog"
+study_prefix = "catalog_experimental"
 
 [sql_config]
 
