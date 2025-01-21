@@ -1,0 +1,13 @@
+[sqlfluff]
+templater = jinja
+dialect = athena
+sql_file_exts = .sql,.sql.jinja
+exclude_rules=
+    # UMLS uses reserved keywords as column names, tsk tsk
+    references.keywords
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = upper
+
+[sqlfluff:templater:jinja:context]
+name = 'cohort'

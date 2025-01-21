@@ -4,7 +4,7 @@ version = "1.0"
 requires-python = ">= 3.11"
 # If you need python libraries, add them here
 dependencies = [
-    "cumulus-library >= 3, <4",
+    "cumulus-library >= 4.2, <5",
     "sqlfluff >=3",
     "xlrd",
     "openpyxl",
@@ -22,10 +22,10 @@ classifiers = [
 ]
 
 [project.urls]
-Home = "https://smarthealthit.org/cumulus-a-universal-sidecar-for-a-smart-learning-healthcare-system/"
+Home = "https://smarthealthit.org/cumulus/"
 Documentation = "https://docs.smarthealthit.org/cumulus/"
 # Change this source to reference your github URL
-Source = "https://github.com/smart-on-fhir/cumulus-library-opioid-valueset"
+Source = "https://github.com/smart-on-fhir/cumulus-library-catalog"
 
 
 [build-system]
@@ -34,8 +34,9 @@ build-backend = "flit_core.buildapi"
 
 [project.optional-dependencies]
 dev = [
-    "ruff < 0.6",
-    "pylint",    
+    "ruff < 0.10",
+    "pylint",
+    "sqlfluff > 3, <4" 
 ]
 test = [
     "pytest",    
