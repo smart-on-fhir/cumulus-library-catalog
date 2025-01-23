@@ -18,17 +18,25 @@ select  *
 from    catalog.MRSAT_loinc
 where   ATN = 'PART_TYPE' and ATV in ('COMPONENT', 'CLASS');
 
+drop    table if exists catalog.MRSAT_loinc_component;
+create  table           catalog.MRSAT_loinc_component as
+select  *
+from    catalog.MRSAT_loinc
+where   ATN = 'LOINC_COMPONENT';
+
 drop    table if exists catalog.MRSAT_loinc_consumer;
 create  table           catalog.MRSAT_loinc_consumer as
 select  *
 from    catalog.MRSAT_loinc
 where   ATN = 'CONSUMER_NAME';
 
-drop    table if exists catalog.MRSAT_loinc_component;
-create  table           catalog.MRSAT_loinc_component as
-select  *
-from    catalog.MRSAT_loinc
-where   ATN = 'LOINC_COMPONENT';
+
+-- LOINC Group ##################################################################
+select distinct
+    groupid as loinc_group_id,
+    loincnumber as loinc_child_code
+from "loinc_groups"."group_loinc_terms"
+where category = 'Flowsheet - laboratory';
 
 -- Concepts ##################################################################
 
