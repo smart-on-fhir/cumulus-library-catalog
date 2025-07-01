@@ -1,76 +1,49 @@
 import pathlib
+from cumulus_library import cli, StudyManifest
 
-from cumulus_library import base_utils, databases, db_config, StudyManifest
-
-from cumulus_library_catalog.catalog import icd10_builder, icd10_counts
+from cumulus_library_catalog.catalog import icd10_annotated_counts
 
 
-def test_umls_tree(tmp_path, mock_db_core_config):
+def test_count_diagnoses(mock_db_core_config):
     cursor = mock_db_core_config.db.cursor()
-    #cursor.execute("CREATE SCHEMA umls")
-    filepath = pathlib.Path.cwd() / "tests/test_data/"
-    for file, columns in [
-        (
-            "MRCONSO",
-            [
-                "CUI",
-                "LAT",
-                "TS",
-                "LUI",
-                "STT",
-                "SUI",
-                "ISPREF",
-                "AUI",
-                "SAUI",
-                "SCUI",
-                "SDUI",
-                "SAB",
-                "TTY",
-                "CODE",
-                "STR",
-                "SRL",
-                "SUPPRESS",
-                "CVF",
-            ],
-        ),
-        (
-            "MRREL",
-            [
-                "CUI1",
-                "AUI1",
-                "STYPE1",
-                "REL",
-                "CUI2",
-                "AUI2",
-                "STYPE2",
-                "RELA",
-                "RUI",
-                "SRUI",
-                "SAB",
-                "SL",
-                "RG",
-                "DIR",
-                "SUPPRESS",
-                "CVF",
-            ],
-        ),
-    ]:
-        cursor.execute(
-            f"""CREATE TABLE "umls"."{file}" AS SELECT "{'","'.join(columns)}"
-        FROM read_parquet('{filepath}/{file}/{file}.parquet')"""
-        )
-
-
+ 
     manifest=StudyManifest(study_path="./cumulus_library_catalog/")
-    builder = icd10_builder.ICDCohortBuilder(manifest)
-    builder.execute_queries(mock_db_core_config,manifest)
-    res = cursor.execute("select * from catalog__icd10_cohort limit 10").fetchall()
-    # TODO: on centralization of test tools, change this to point to a
-    # record created via the testbed
+    builder = icd10_annotated_counts.IcdCountsBuilder(manifest)
+    builder.execute_queries(mock_db_core_config,manifest, min_subject=1)
+    res = cursor.execute("select * from catalog__count_icd10_diagnoses").fetchall()
+
+    # There's exactly one ICD10 code in our mock condition data, so we get a small result back.
     assert res[0] == (
-        'C0348191', 'C0348191', 'B05.89', 'Other measles complications', 
-        'AMB', None, 25, 'female', 'white', 'hispanic or latino', 
-        'Patient/24906e2c-e556-71dc-23d9-3e1d5fb08986', 
-        'Encounter/1154d05c-8727-9373-4224-25b9fdba9ab3', 'finished'
+        1,
+        'B05.89',
+        'A00-B99',
+        'Certain infectious and parasitic diseases (A00-B99)',
+        'B00-B09',
+        'Viral infections characterized by skin and mucous membrane lesions (B00-B09)',
+        'B05',
+        'Measles',
+        'B05.8',
+        'Measles with other complications',
+        'B05.89',
+        'Other measles complications',
+        None,
+        None,
+        None,
+        None
     )
+
+def test_build_study(mock_db_core_config):
+    cursor = mock_db_core_config.db.cursor()
+    table_count = len(cursor.execute("select * from information_schema.tables").fetchall())
+    study_path = pathlib.Path(__file__).parent.parent / "cumulus_library_catalog/"
+    builder = cli.StudyRunner(
+        mock_db_core_config, 
+        data_path=study_path
+    )
+    builder.clean_and_build_study(
+        study_path,
+        options={},
+    )
+    new_count = len(cursor.execute("select * from information_schema.tables").fetchall())
+    assert new_count == table_count + 4
 
