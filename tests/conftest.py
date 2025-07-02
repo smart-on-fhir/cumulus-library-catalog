@@ -1,11 +1,13 @@
 import inspect
-import pandas
 import pathlib
+
+import cumulus_library
+import pandas
 import pytest
+from cumulus_library import base_utils, cli
 from cumulus_library.databases import create_db_backend
 from cumulus_library.template_sql import base_templates
-from cumulus_library import base_utils, cli
-import cumulus_library
+
 
 @pytest.fixture
 def mock_db_core_config(tmp_path):
@@ -29,18 +31,19 @@ def mock_db_core_config(tmp_path):
     )
     cursor = db.cursor()
     cursor.execute("CREATE SCHEMA umls")
-    for parquet in sorted(pathlib.Path("tests/test_data/icd10").iterdir()):
-        df = pandas.read_parquet(parquet)
-        cursor.execute(
-            base_templates.get_ctas_from_parquet_query(
-                schema_name='umls',
-                table_name = parquet.stem,
-                local_location = parquet,
-                table_cols = df.columns,
-                remote_location = None,
-                remote_table_cols_types=None,
+    icd10_parquet = pathlib.Path(__file__).parent / "test_data/icd10_hierarchy/icd10_hierarchy.parquet"
+    df = pandas.read_parquet(icd10_parquet)
 
-            )
+    cursor.execute(
+        base_templates.get_ctas_from_parquet_query(
+            schema_name='umls',
+            table_name = icd10_parquet.stem,
+            local_location = icd10_parquet,
+            table_cols = df.columns,
+            remote_location = None,
+            remote_table_cols_types=None,
+
         )
+    )
     config = base_utils.StudyConfig(db=db, schema="main")
     yield config

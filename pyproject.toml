@@ -1,6 +1,6 @@
 [project]
 name = "cumulus-library-catalog"
-version = "1.0"
+dynamic=["version"]
 requires-python = ">= 3.11"
 # If you need python libraries, add them here
 dependencies = [
