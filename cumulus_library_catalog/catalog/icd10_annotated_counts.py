@@ -11,13 +11,19 @@ class IcdCountsBuilder(cumulus_library.CountsBuilder):
         Primarily exists for overriding min_subject for small bins in
         test data.
         """
+        if min_subject is None:
+            min_subject = 10
         return self.count_patient(
             table_name = "catalog__count_icd10_diagnoses",
             table_cols=[
                 "code",
             ],
             source_table="core__condition",
-            min_subject=min_subject,
+            where_clauses=[
+                "block_code not in('A50-A64','A70-A74','B20-B20')",
+                "chapter_code not in('F01-F99','Z00-Z99')",
+                f"cnt_subject_ref >= {min_subject}"
+                ],
             annotation= cumulus_library.CountAnnotation(
                     field = 'code',
                     join_table= '"umls"."icd10_hierarchy"',
