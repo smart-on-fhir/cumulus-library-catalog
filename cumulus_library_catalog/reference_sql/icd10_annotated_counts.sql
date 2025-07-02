@@ -44,24 +44,26 @@ CREATE TABLE catalog__count_icd10_diagnoses AS (
 
     SELECT
         p.cnt_subject_ref AS cnt,
-        p.code,
-        j.chapter_code,
-        j.chapter_str,
-        j.block_code,
-        j.block_str,
-        j.category_code,
-        j.category_str,
-        j.subcategory_1_code,
-        j.subcategory_1_str,
-        j.subcategory_2_code,
-        j.subcategory_2_str,
-        j.subcategory_3_code,
-        j.subcategory_3_str,
-        j.extension_code,
-        j.extension_str
+        p."code",
+        j."chapter_code",
+        j."chapter_str",
+        j."block_code",
+        j."block_str",
+        j."category_code",
+        j."category_str",
+        j."subcategory_1_code",
+        j."subcategory_1_str",
+        j."subcategory_2_code",
+        j."subcategory_2_str",
+        j."subcategory_3_code",
+        j."subcategory_3_str",
+        j."extension_code",
+        j."extension_str"
     FROM powerset AS p
         JOIN "umls"."icd10_hierarchy" j ON p.code = j.leaf_code
     WHERE
-        system = 'http://hl7.org/fhir/sid/icd-10-cm'
+        block_code not in('A50-A64','A70-A74','B20-B20')
+        AND chapter_code not in('F01-F99','Z00-Z99')
+        AND cnt_subject_ref >= 10
         
 );
