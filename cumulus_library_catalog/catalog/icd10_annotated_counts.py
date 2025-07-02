@@ -20,6 +20,9 @@ class IcdCountsBuilder(cumulus_library.CountsBuilder):
             ],
             source_table="core__condition",
             where_clauses=[
+                # These codes are excluded from the catalog because they correspond
+                # to sensitive conditions (mental health/STDs) that hospitals 
+                # do not want to share with others for legal reasons
                 "block_code not in('A50-A64','A70-A74','B20-B20')",
                 "chapter_code not in('F01-F99','Z00-Z99')",
                 f"cnt_subject_ref >= {min_subject}"
