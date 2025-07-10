@@ -8,7 +8,7 @@ file_names = [
 
 
 [export_config]
-annotated_counts = [
+annotated_count_list = [
     "catalog__count_icd10_diagnoses"
 ]
 
