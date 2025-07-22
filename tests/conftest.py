@@ -31,7 +31,9 @@ def mock_db_core_config(tmp_path):
     )
     cursor = db.cursor()
     cursor.execute("CREATE SCHEMA umls")
-    icd10_parquet = pathlib.Path(__file__).parent / "test_data/icd10_hierarchy/icd10_hierarchy.parquet"
+    icd10_parquet = (
+        pathlib.Path(__file__).parent / "test_data/icd10_hierarchy/icd10_hierarchy.parquet"
+    )
     df = pandas.read_parquet(icd10_parquet)
 
     cursor.execute(

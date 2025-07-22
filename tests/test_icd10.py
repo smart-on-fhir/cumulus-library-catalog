@@ -5,6 +5,7 @@ from cumulus_library import StudyManifest, cli
 
 from cumulus_library_catalog.catalog import icd10_annotated_counts
 
+
 @pytest.mark.parametrize(
     "tier,expected",
     [

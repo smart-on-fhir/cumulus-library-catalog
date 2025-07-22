@@ -2,7 +2,6 @@ import cumulus_library
 from cumulus_library import errors, study_manifest
 
 
-
 class IcdCountsBuilder(cumulus_library.CountsBuilder):
     display_text = "Creating ICD10 counts..."
     def get_icd10_diagnosis_query(self, table_name, depth, min_subject: int | None = None):
