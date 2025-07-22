@@ -34,7 +34,7 @@ build-backend = "flit_core.buildapi"
 
 [project.optional-dependencies]
 dev = [
-    "ruff < 0.10",
+    "ruff < 0.13",
     "pylint",
     "sqlfluff > 3, <4" 
 ]
