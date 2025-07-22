@@ -1,4 +1,5 @@
 name: CI
+on: [push]
 
 # The goal here is to cancel older workflows when a PR is updated (because it's pointless work)
 concurrency:
