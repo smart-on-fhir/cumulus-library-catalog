@@ -6,13 +6,18 @@
 
 -- ###########################################################
 
-CREATE TABLE catalog__count_icd10_diagnoses AS (
+CREATE TABLE catalog__count_icd10_all AS (SELECT count(DISTINCT subject_ref) AS cnt FROM core__condition WHERE system ='http://hl7.org/fhir/sid/icd-10-cm');
+
+-- ###########################################################
+
+CREATE TABLE catalog__count_icd10_chapter AS (
     WITH
     filtered_table AS (
         SELECT
             s.subject_ref,
             --noqa: disable=RF03, AL02
-            s."code"
+            s."code",
+            s."system"
             --noqa: enable=RF03, AL02
         FROM core__condition AS s
     ),
@@ -23,7 +28,11 @@ CREATE TABLE catalog__count_icd10_diagnoses AS (
             coalesce(
                 cast(code AS varchar),
                 'cumulus__none'
-            ) AS code
+            ) AS code,
+            coalesce(
+                cast(system AS varchar),
+                'cumulus__none'
+            ) AS system
         FROM filtered_table
     ),
 
@@ -31,39 +40,449 @@ CREATE TABLE catalog__count_icd10_diagnoses AS (
         SELECT
             count(DISTINCT subject_ref) AS cnt_subject_ref,
             "code",
+            "system",
             concat_ws(
                 '-',
-                COALESCE("code",'')
+                COALESCE("code",''),
+                COALESCE("system",'')
             ) AS id
         FROM null_replacement
         GROUP BY
             cube(
-            "code"
+            "code",
+            "system"
             )
     )
 
     SELECT
-        p.cnt_subject_ref AS cnt,
-        p."code",
-        j."chapter_code",
+        sum(p.cnt_subject_ref) AS cnt,
         j."chapter_str",
-        j."block_code",
-        j."block_str",
-        j."category_code",
-        j."category_str",
-        j."subcategory_1_code",
-        j."subcategory_1_str",
-        j."subcategory_2_code",
-        j."subcategory_2_str",
-        j."subcategory_3_code",
-        j."subcategory_3_str",
-        j."extension_code",
-        j."extension_str"
+        j."chapter_code"
     FROM powerset AS p
         JOIN "umls"."icd10_hierarchy" j ON p.code = j.leaf_code
     WHERE
-        block_code not in('A50-A64','A70-A74','B20-B20')
-        AND chapter_code not in('F01-F99','Z00-Z99')
+        block_code NOT IN ('A50-A64','A70-A74','B20-B20')
+        AND chapter_code NOT IN ('F01-F99','Z00-Z99')
         AND cnt_subject_ref >= 10
+        AND chapter_code IS NOT NULL
+        AND system ='http://hl7.org/fhir/sid/icd-10-cm'
         
+    GROUP BY
+        j."chapter_str",
+        j."chapter_code"
+    ORDER BY chapter_code ASC
+);
+
+-- ###########################################################
+
+CREATE TABLE catalog__count_icd10_block AS (
+    WITH
+    filtered_table AS (
+        SELECT
+            s.subject_ref,
+            --noqa: disable=RF03, AL02
+            s."code",
+            s."system"
+            --noqa: enable=RF03, AL02
+        FROM core__condition AS s
+    ),
+    
+    null_replacement AS (
+        SELECT
+            subject_ref,
+            coalesce(
+                cast(code AS varchar),
+                'cumulus__none'
+            ) AS code,
+            coalesce(
+                cast(system AS varchar),
+                'cumulus__none'
+            ) AS system
+        FROM filtered_table
+    ),
+
+    powerset AS (
+        SELECT
+            count(DISTINCT subject_ref) AS cnt_subject_ref,
+            "code",
+            "system",
+            concat_ws(
+                '-',
+                COALESCE("code",''),
+                COALESCE("system",'')
+            ) AS id
+        FROM null_replacement
+        GROUP BY
+            cube(
+            "code",
+            "system"
+            )
+    )
+
+    SELECT
+        sum(p.cnt_subject_ref) AS cnt,
+        j."chapter_code",
+        j."chapter_str",
+        j."block_str",
+        j."block_code"
+    FROM powerset AS p
+        JOIN "umls"."icd10_hierarchy" j ON p.code = j.leaf_code
+    WHERE
+        block_code NOT IN ('A50-A64','A70-A74','B20-B20')
+        AND chapter_code NOT IN ('F01-F99','Z00-Z99')
+        AND cnt_subject_ref >= 10
+        AND block_code IS NOT NULL
+        AND system ='http://hl7.org/fhir/sid/icd-10-cm'
+        
+    GROUP BY
+        j."chapter_code",
+        j."chapter_str",
+        j."block_str",
+        j."block_code"
+    ORDER BY block_code ASC
+);
+
+-- ###########################################################
+
+CREATE TABLE catalog__count_icd10_category AS (
+    WITH
+    filtered_table AS (
+        SELECT
+            s.subject_ref,
+            --noqa: disable=RF03, AL02
+            s."code",
+            s."system"
+            --noqa: enable=RF03, AL02
+        FROM core__condition AS s
+    ),
+    
+    null_replacement AS (
+        SELECT
+            subject_ref,
+            coalesce(
+                cast(code AS varchar),
+                'cumulus__none'
+            ) AS code,
+            coalesce(
+                cast(system AS varchar),
+                'cumulus__none'
+            ) AS system
+        FROM filtered_table
+    ),
+
+    powerset AS (
+        SELECT
+            count(DISTINCT subject_ref) AS cnt_subject_ref,
+            "code",
+            "system",
+            concat_ws(
+                '-',
+                COALESCE("code",''),
+                COALESCE("system",'')
+            ) AS id
+        FROM null_replacement
+        GROUP BY
+            cube(
+            "code",
+            "system"
+            )
+    )
+
+    SELECT
+        sum(p.cnt_subject_ref) AS cnt,
+        j."block_code",
+        j."block_str",
+        j."category_str",
+        j."category_code"
+    FROM powerset AS p
+        JOIN "umls"."icd10_hierarchy" j ON p.code = j.leaf_code
+    WHERE
+        block_code NOT IN ('A50-A64','A70-A74','B20-B20')
+        AND chapter_code NOT IN ('F01-F99','Z00-Z99')
+        AND cnt_subject_ref >= 10
+        AND category_code IS NOT NULL
+        AND system ='http://hl7.org/fhir/sid/icd-10-cm'
+        
+    GROUP BY
+        j."block_code",
+        j."block_str",
+        j."category_str",
+        j."category_code"
+    ORDER BY category_code ASC
+);
+
+-- ###########################################################
+
+CREATE TABLE catalog__count_icd10_subcategory_1 AS (
+    WITH
+    filtered_table AS (
+        SELECT
+            s.subject_ref,
+            --noqa: disable=RF03, AL02
+            s."code",
+            s."system"
+            --noqa: enable=RF03, AL02
+        FROM core__condition AS s
+    ),
+    
+    null_replacement AS (
+        SELECT
+            subject_ref,
+            coalesce(
+                cast(code AS varchar),
+                'cumulus__none'
+            ) AS code,
+            coalesce(
+                cast(system AS varchar),
+                'cumulus__none'
+            ) AS system
+        FROM filtered_table
+    ),
+
+    powerset AS (
+        SELECT
+            count(DISTINCT subject_ref) AS cnt_subject_ref,
+            "code",
+            "system",
+            concat_ws(
+                '-',
+                COALESCE("code",''),
+                COALESCE("system",'')
+            ) AS id
+        FROM null_replacement
+        GROUP BY
+            cube(
+            "code",
+            "system"
+            )
+    )
+
+    SELECT
+        sum(p.cnt_subject_ref) AS cnt,
+        j."category_code",
+        j."category_str",
+        j."subcategory_1_str",
+        j."subcategory_1_code"
+    FROM powerset AS p
+        JOIN "umls"."icd10_hierarchy" j ON p.code = j.leaf_code
+    WHERE
+        block_code NOT IN ('A50-A64','A70-A74','B20-B20')
+        AND chapter_code NOT IN ('F01-F99','Z00-Z99')
+        AND cnt_subject_ref >= 10
+        AND subcategory_1_code IS NOT NULL
+        AND system ='http://hl7.org/fhir/sid/icd-10-cm'
+        
+    GROUP BY
+        j."category_code",
+        j."category_str",
+        j."subcategory_1_str",
+        j."subcategory_1_code"
+    ORDER BY subcategory_1_code ASC
+);
+
+-- ###########################################################
+
+CREATE TABLE catalog__count_icd10_subcategory_2 AS (
+    WITH
+    filtered_table AS (
+        SELECT
+            s.subject_ref,
+            --noqa: disable=RF03, AL02
+            s."code",
+            s."system"
+            --noqa: enable=RF03, AL02
+        FROM core__condition AS s
+    ),
+    
+    null_replacement AS (
+        SELECT
+            subject_ref,
+            coalesce(
+                cast(code AS varchar),
+                'cumulus__none'
+            ) AS code,
+            coalesce(
+                cast(system AS varchar),
+                'cumulus__none'
+            ) AS system
+        FROM filtered_table
+    ),
+
+    powerset AS (
+        SELECT
+            count(DISTINCT subject_ref) AS cnt_subject_ref,
+            "code",
+            "system",
+            concat_ws(
+                '-',
+                COALESCE("code",''),
+                COALESCE("system",'')
+            ) AS id
+        FROM null_replacement
+        GROUP BY
+            cube(
+            "code",
+            "system"
+            )
+    )
+
+    SELECT
+        sum(p.cnt_subject_ref) AS cnt,
+        j."subcategory_1_code",
+        j."subcategory_1_str",
+        j."subcategory_2_str",
+        j."subcategory_2_code"
+    FROM powerset AS p
+        JOIN "umls"."icd10_hierarchy" j ON p.code = j.leaf_code
+    WHERE
+        block_code NOT IN ('A50-A64','A70-A74','B20-B20')
+        AND chapter_code NOT IN ('F01-F99','Z00-Z99')
+        AND cnt_subject_ref >= 10
+        AND subcategory_2_code IS NOT NULL
+        AND system ='http://hl7.org/fhir/sid/icd-10-cm'
+        
+    GROUP BY
+        j."subcategory_1_code",
+        j."subcategory_1_str",
+        j."subcategory_2_str",
+        j."subcategory_2_code"
+    ORDER BY subcategory_2_code ASC
+);
+
+-- ###########################################################
+
+CREATE TABLE catalog__count_icd10_subcategory_3 AS (
+    WITH
+    filtered_table AS (
+        SELECT
+            s.subject_ref,
+            --noqa: disable=RF03, AL02
+            s."code",
+            s."system"
+            --noqa: enable=RF03, AL02
+        FROM core__condition AS s
+    ),
+    
+    null_replacement AS (
+        SELECT
+            subject_ref,
+            coalesce(
+                cast(code AS varchar),
+                'cumulus__none'
+            ) AS code,
+            coalesce(
+                cast(system AS varchar),
+                'cumulus__none'
+            ) AS system
+        FROM filtered_table
+    ),
+
+    powerset AS (
+        SELECT
+            count(DISTINCT subject_ref) AS cnt_subject_ref,
+            "code",
+            "system",
+            concat_ws(
+                '-',
+                COALESCE("code",''),
+                COALESCE("system",'')
+            ) AS id
+        FROM null_replacement
+        GROUP BY
+            cube(
+            "code",
+            "system"
+            )
+    )
+
+    SELECT
+        sum(p.cnt_subject_ref) AS cnt,
+        j."subcategory_2_code",
+        j."subcategory_2_str",
+        j."subcategory_3_str",
+        j."subcategory_3_code"
+    FROM powerset AS p
+        JOIN "umls"."icd10_hierarchy" j ON p.code = j.leaf_code
+    WHERE
+        block_code NOT IN ('A50-A64','A70-A74','B20-B20')
+        AND chapter_code NOT IN ('F01-F99','Z00-Z99')
+        AND cnt_subject_ref >= 10
+        AND subcategory_3_code IS NOT NULL
+        AND system ='http://hl7.org/fhir/sid/icd-10-cm'
+        
+    GROUP BY
+        j."subcategory_2_code",
+        j."subcategory_2_str",
+        j."subcategory_3_str",
+        j."subcategory_3_code"
+    ORDER BY subcategory_3_code ASC
+);
+
+-- ###########################################################
+
+CREATE TABLE catalog__count_icd10_extension AS (
+    WITH
+    filtered_table AS (
+        SELECT
+            s.subject_ref,
+            --noqa: disable=RF03, AL02
+            s."code",
+            s."system"
+            --noqa: enable=RF03, AL02
+        FROM core__condition AS s
+    ),
+    
+    null_replacement AS (
+        SELECT
+            subject_ref,
+            coalesce(
+                cast(code AS varchar),
+                'cumulus__none'
+            ) AS code,
+            coalesce(
+                cast(system AS varchar),
+                'cumulus__none'
+            ) AS system
+        FROM filtered_table
+    ),
+
+    powerset AS (
+        SELECT
+            count(DISTINCT subject_ref) AS cnt_subject_ref,
+            "code",
+            "system",
+            concat_ws(
+                '-',
+                COALESCE("code",''),
+                COALESCE("system",'')
+            ) AS id
+        FROM null_replacement
+        GROUP BY
+            cube(
+            "code",
+            "system"
+            )
+    )
+
+    SELECT
+        sum(p.cnt_subject_ref) AS cnt,
+        j."subcategory_3_code",
+        j."subcategory_3_str",
+        j."extension_str",
+        j."extension_code"
+    FROM powerset AS p
+        JOIN "umls"."icd10_hierarchy" j ON p.code = j.leaf_code
+    WHERE
+        block_code NOT IN ('A50-A64','A70-A74','B20-B20')
+        AND chapter_code NOT IN ('F01-F99','Z00-Z99')
+        AND cnt_subject_ref >= 10
+        AND extension_code IS NOT NULL
+        AND system ='http://hl7.org/fhir/sid/icd-10-cm'
+        
+    GROUP BY
+        j."subcategory_3_code",
+        j."subcategory_3_str",
+        j."extension_str",
+        j."extension_code"
+    ORDER BY extension_code ASC
 );

@@ -31,18 +31,19 @@ def mock_db_core_config(tmp_path):
     )
     cursor = db.cursor()
     cursor.execute("CREATE SCHEMA umls")
-    icd10_parquet = pathlib.Path(__file__).parent / "test_data/icd10_hierarchy/icd10_hierarchy.parquet"
+    icd10_parquet = (
+        pathlib.Path(__file__).parent / "test_data/icd10_hierarchy/icd10_hierarchy.parquet"
+    )
     df = pandas.read_parquet(icd10_parquet)
 
     cursor.execute(
         base_templates.get_ctas_from_parquet_query(
-            schema_name='umls',
-            table_name = icd10_parquet.stem,
-            local_location = icd10_parquet,
-            table_cols = df.columns,
-            remote_location = None,
+            schema_name="umls",
+            table_name=icd10_parquet.stem,
+            local_location=icd10_parquet,
+            table_cols=df.columns,
+            remote_location=None,
             remote_table_cols_types=None,
-
         )
     )
     config = base_utils.StudyConfig(db=db, schema="main")
