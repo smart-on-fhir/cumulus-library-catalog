@@ -9,7 +9,14 @@ file_names = [
 
 [export_config]
 annotated_count_list = [
-    "catalog__count_icd10_diagnoses"
+    "catalog__count_icd10_all",
+    "catalog__count_icd10_chapter",
+    "catalog__count_icd10_block",
+    "catalog__count_icd10_category",
+    "catalog__count_icd10_subcategory_1",
+    "catalog__count_icd10_subcategory_2",
+    "catalog__count_icd10_subcategory_3",
+    "catalog__count_icd10_extension",
 ]
 
 meta_list = [

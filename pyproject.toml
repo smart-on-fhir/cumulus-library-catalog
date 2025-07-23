@@ -4,7 +4,7 @@ dynamic=["version"]
 requires-python = ">= 3.11"
 # If you need python libraries, add them here
 dependencies = [
-    "cumulus-library >= 4.2, <5",
+    "cumulus-library >= 4.6.4, <5",
     "sqlfluff >=3",
     "xlrd",
     "openpyxl",
@@ -34,12 +34,13 @@ build-backend = "flit_core.buildapi"
 
 [project.optional-dependencies]
 dev = [
-    "ruff < 0.10",
+    "ruff < 0.13",
     "pylint",
     "sqlfluff > 3, <4" 
 ]
 test = [
-    "pytest",    
+    "pytest",
+    "pytest-cov",
 ]
 
 [tool.flit.sdist]
