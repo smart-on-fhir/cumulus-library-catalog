@@ -5,22 +5,8 @@ from cumulus_library import StudyManifest, cli
 
 from cumulus_library_catalog.catalog import icd10_annotated_counts
 
-
-@pytest.mark.parametrize(
-    "tier,expected",
-    [
-        ("all", (2,)),
-        ("chapter", (1, "Certain infectious and parasitic diseases (A00-B99)", "A00-B99")),
-        (
-            "block",
-            (
-                1,
-                "A00-B99",
-                "Certain infectious and parasitic diseases (A00-B99)",
-                "Viral infections characterized by skin and mucous membrane lesions (B00-B09)",
-                "B00-B09",
-            ),
-        ),
+"""
+        
         (
             "category",
             (
@@ -44,6 +30,47 @@ from cumulus_library_catalog.catalog import icd10_annotated_counts
         ),
         ("subcategory_3", ()),
         ("extension", ()),
+"""
+@pytest.mark.parametrize(
+    "tier,expected",
+    [
+        ("all", (2,)),
+        ("chapter", (1, "A00-B99", "Certain infectious and parasitic diseases (A00-B99)")),
+        (
+            "block",
+            (
+                1,
+                "A00-B99",
+                "Certain infectious and parasitic diseases (A00-B99)",
+                "B00-B09",
+                "Viral infections characterized by skin and mucous membrane lesions (B00-B09)",
+            ),
+        ),
+        (
+            "category",
+            (
+                1,
+                "B00-B09",
+                "Viral infections characterized by skin and mucous membrane lesions (B00-B09)",
+                "B05",
+                "Measles",
+            ),
+        ),
+        ("subcategory_1", (1, "B05", "Measles", "B05.8", "Measles with other complications")),
+        (
+            "subcategory_2",
+            (
+                1,
+                "B05.8",
+                "Measles with other complications",
+                "B05.89",
+                "Other measles complications",
+            ),
+        ),
+        ("subcategory_3", ()),
+        ("extension", ()),
+
+        
     ],
 )
 def test_count_tiers(mock_db_core_config, tier, expected):
