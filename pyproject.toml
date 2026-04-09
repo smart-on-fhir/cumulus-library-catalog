@@ -4,7 +4,7 @@ dynamic=["version"]
 requires-python = ">= 3.11"
 # If you need python libraries, add them here
 dependencies = [
-    "cumulus-library >= 5, <6",
+    "cumulus-library >= 6, <7",
     "sqlfluff >=3",
     "xlrd",
     "openpyxl",

@@ -1,14 +1,14 @@
 study_prefix = "catalog"
 
-[file_config]
-file_names = [
+[[stages.default]]
+files = [
     "catalog/icd10_annotated_counts.py",
     "catalog/meta.sql",
 ]
 
 
-[export_config]
-annotated_count_list = [
+[[stages.default]]
+tables = [
     "catalog__count_icd10_all",
     "catalog__count_icd10_chapter",
     "catalog__count_icd10_block",
@@ -18,8 +18,11 @@ annotated_count_list = [
     "catalog__count_icd10_subcategory_3",
     "catalog__count_icd10_extension",
 ]
+type = "export:annotated_counts"
 
-meta_list = [
+[[stages.default]]
+tables = [
     "meta_version",
     "meta_date"
 ]
+type = "export:meta"
